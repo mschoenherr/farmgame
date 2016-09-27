@@ -1,0 +1,93 @@
+#:kivy 1.9.1
+
+<FarmGame>:
+
+	farm: farmfield
+
+	FarmField:
+		size: root.size
+		id: farmfield
+		
+
+<FarmPlot>:
+	
+	canvas:
+		Rectangle: 
+			source: "images/" + str(self.plant) + ".png"
+			size: self.size
+			pos: self.pos	
+
+		Rectangle:
+			size: 25, 10
+			pos: self.pos
+
+
+<FarmField>:
+
+	plot1: pl1
+	plot2: pl2
+	plot3: pl3
+
+	plot4: pl4
+	plot5: pl5
+	plot6: pl6
+
+	plot7: pl7
+	plot8: pl8
+	plot9: pl9
+
+	FarmPlot:
+		id: pl1
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width / 24
+		y: self.parent.y + self.parent.height / 24
+
+	FarmPlot:
+		id: pl2
+		x: self.parent.x + self.parent.width /3 + self.parent.width / 24
+		y: self.parent.y + self.parent.height / 24
+		size: self.parent.width / 4 , self.parent.height / 4
+
+	FarmPlot:
+		id: pl3
+		x: self.parent.x + self.parent.width * 2/3 + self.parent.width / 24
+		y: self.parent.y + self.parent.height / 24
+		size: self.parent.width / 4 , self.parent.height / 4
+
+	FarmPlot:
+		id: pl4
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width / 24
+		y: self.parent.y + self.parent.height / 3 + self.parent.height / 24
+
+	FarmPlot:
+		id: pl5
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width /3 + self.parent.width / 24
+		y: self.parent.y + self.parent.height / 3 + self.parent.height / 24
+
+	FarmPlot:
+		id: pl6
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width * 2 /3 + self.parent.width / 24
+		y: self.parent.y + self.parent.height / 3 + self.parent.height / 24
+
+	FarmPlot:
+		id: pl7
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width / 24
+		y: self.parent.y + self.parent.height * 2 / 3 + self.parent.height / 24
+
+	FarmPlot:
+		id: pl8
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width /3 + self.parent.width / 24
+		y: self.parent.y + self.parent.height * 2 / 3 + self.parent.height / 24
+
+	FarmPlot:
+		id: pl9
+		size: self.parent.width / 4 , self.parent.height / 4
+		x: self.parent.x + self.parent.width * 2 / 3 + self.parent.width / 24
+		y: self.parent.y + self.parent.height * 2 / 3 + self.parent.height / 24
+
+
