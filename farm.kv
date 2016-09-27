@@ -1,25 +1,45 @@
 #:kivy 1.9.1
+#:import trunc math.trunc
 
 <FarmGame>:
 
 	farm: farmfield
 
-	FarmField:
+	GridLayout:
+
 		size: root.size
-		id: farmfield
+		pos: root.pos
+
+		cols: 1
+		rows: 2
+
+		Widget:
+			size_hint_x: 1.0
+			size_hint_y: 0.33
+
+			canvas:
+				Rectangle:
+					size: self.size
+					pos: self.pos
+					source: "images/sky2.png"
+
+		FarmField:
+			size_hint_x: 1.0
+			size_hint_y: 0.66
+			id: farmfield
 		
 
 <FarmPlot>:
 	
 	canvas:
 		Rectangle: 
-			source: "images/" + str(self.plant) + ".png"
+			source: "images/" + str(self.plant.name) + ".png"
 			size: self.size
 			pos: self.pos	
-
-		Rectangle:
-			size: 25, 10
-			pos: self.pos
+	Label:
+		text: str(trunc(self.parent.phosphor_level))
+		size: self.parent.size
+		pos: self.parent.pos
 
 
 <FarmField>:
@@ -35,6 +55,13 @@
 	plot7: pl7
 	plot8: pl8
 	plot9: pl9
+	
+	canvas:
+			
+		Rectangle:
+			source: "images/meaddow.png"
+			size: self.size
+			pos: self.pos
 
 	FarmPlot:
 		id: pl1
