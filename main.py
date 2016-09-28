@@ -3,7 +3,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ReferenceListProperty
 from kivy.uix.button import Button
 from kivy.uix.image import Image
-from kivy.uix.screenmanager import ScreenManager, Screen, WipeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 
 from plant import *
@@ -61,6 +61,7 @@ class VeggieScreen(Screen):
 
     def on_touch_move(self,dt):
 
+        sm.transition.direction='up'
         sm.current = sm.next()
 
 class FarmGame(Screen):
@@ -72,9 +73,10 @@ class FarmGame(Screen):
 
     def on_touch_move(self,dt):
 
+        sm.transition.direction='right'
         sm.current = sm.next()
 
-sm = ScreenManager(transition=WipeTransition())
+sm = ScreenManager(transition=SlideTransition())
 
 class FarmApp(App):
     
