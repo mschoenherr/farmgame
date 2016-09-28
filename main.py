@@ -3,6 +3,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ReferenceListProperty
 from kivy.uix.button import Button
 from kivy.uix.image import Image
+from kivy.uix.screenmanager import ScreenManager, Screen, WipeTransition
 from kivy.clock import Clock
 
 from plant import *
@@ -20,7 +21,7 @@ class FarmPlot(Widget):
   
     def on_touch_down(self,touch):
 
-        if self.collide_point(*touch.pos):
+        if self.collide_point(*touch.pos) and touch.is_double_tap:
             if self.plant.name == "empty":
                 self.plant = carrots
             else:
@@ -55,19 +56,38 @@ class FarmField(Widget):
 
                 plot.update(dt)
 
-class FarmGame(Widget):
+class VeggieScreen(Screen):
+
+
+    def on_touch_move(self,dt):
+
+        sm.current = sm.next()
+
+class FarmGame(Screen):
 
     farm = ObjectProperty(None)
 
     def update(self,dt):
         self.farm.update(dt)
 
+    def on_touch_move(self,dt):
+
+        sm.current = sm.next()
+
+sm = ScreenManager(transition=WipeTransition())
+
 class FarmApp(App):
     
     def build(self):
-        game = FarmGame()
+
+        game = FarmGame(name='game')
+        veggie = VeggieScreen(name='veggie')
+
+        sm.add_widget(game)
+        sm.add_widget(veggie)
+
         Clock.schedule_interval(game.update,1.0)
-        return game
+        return sm
 
 if __name__ == "__main__":
     FarmApp().run()

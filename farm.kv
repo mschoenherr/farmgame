@@ -1,6 +1,13 @@
 #:kivy 1.9.1
 #:import trunc math.trunc
 
+<VeggieScreen>:
+
+	Widget:
+		canvas:
+			Rectangle:
+				size: self.size
+				pos: self.pos
 <FarmGame>:
 
 	farm: farmfield
@@ -16,6 +23,8 @@
 		Widget:
 			size_hint_x: 1.0
 			size_hint_y: 0.33
+			width: self.parent.width
+			height: self.parent.height * 1/3
 
 			canvas:
 				Rectangle:
@@ -26,8 +35,10 @@
 		FarmField:
 			size_hint_x: 1.0
 			size_hint_y: 0.66
+			width: self.parent.width
+			height: self.parent.height * 2/3
 			id: farmfield
-		
+
 
 <FarmPlot>:
 	
