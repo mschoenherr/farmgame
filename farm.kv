@@ -62,25 +62,23 @@
 	
 	AnchorLayout:
 		
-		canvas:
-			Rectangle:
-				size: self.size
-				pos: self.pos
-				source: "images/meaddow.png"
-
+		
 		size: self.parent.size
 
-		padding: 10
-
 		GridLayout:
+			canvas:
+				Rectangle:
+					size: self.size
+					pos: self.pos
+					source: "images/meaddow.png"
 
+			padding: 32
 			spacing: 32
 			
-			center: self.parent.center
-			row_default_height: min(self.parent.width,self.parent.height)/4
-			col_default_width: min(self.parent.width,self.parent.height)/4
-			row_force_default: True
-			col_force_default: True
+			size_hint: None, None
+			height: min(self.parent.width,self.parent.height)
+			width: min(self.parent.width,self.parent.height)
+
 			rows: 3
 			cols: 3	
 
