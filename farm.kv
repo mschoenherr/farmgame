@@ -14,31 +14,27 @@
 
 	GridLayout:
 
-		cols: 1
 		rows: 2
+		cols: 1
+
 
 		Image:
 			size_hint_x: 1.0
 			size_hint_y: 0.33
 			allow_stretch: True
-			keep_ration: True
+			keep_ratio: True
 			width: self.parent.width
 			height: self.parent.width / self.image_ratio
-
-			canvas:
-				Rectangle:
-					size: self.size
-					pos: self.pos
-					source: "images/sky2.png"
+			source: "images/sky2.png"
 
 		FarmField:
-			width: self.parent.width
-			height: self.parent.height * 2/3
+			size_hint_x: 1.0
+			size_hint_y: 0.66
 			id: farmfield
 
 
 <FarmPlot>:
-	
+
 	canvas:
 		Rectangle: 
 			source: "images/" + str(self.plant.name) + ".png"
@@ -64,65 +60,54 @@
 	plot8: pl8
 	plot9: pl9
 	
-	canvas:
+	AnchorLayout:
+		
+		canvas:
+			Rectangle:
+				size: self.size
+				pos: self.pos
+				source: "images/meaddow.png"
+
+		size: self.parent.size
+
+		padding: 10
+
+		GridLayout:
+
+			spacing: 32
 			
-		Rectangle:
-			source: "images/meaddow.png"
-			size: self.size
-			pos: self.pos
+			center: self.parent.center
+			row_default_height: min(self.parent.width,self.parent.height)/4
+			col_default_width: min(self.parent.width,self.parent.height)/4
+			row_force_default: True
+			col_force_default: True
+			rows: 3
+			cols: 3	
 
-	FarmPlot:
-		id: pl1
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width / 24
-		y: self.parent.y + self.parent.height / 24
+			FarmPlot:
+				id: pl1
 
-	FarmPlot:
-		id: pl2
-		x: self.parent.x + self.parent.width /3 + self.parent.width / 24
-		y: self.parent.y + self.parent.height / 24
-		size: self.parent.width / 4 , self.parent.height / 4
+			FarmPlot:
+				id: pl2
 
-	FarmPlot:
-		id: pl3
-		x: self.parent.x + self.parent.width * 2/3 + self.parent.width / 24
-		y: self.parent.y + self.parent.height / 24
-		size: self.parent.width / 4 , self.parent.height / 4
+			FarmPlot:
+				id: pl3
 
-	FarmPlot:
-		id: pl4
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width / 24
-		y: self.parent.y + self.parent.height / 3 + self.parent.height / 24
+			FarmPlot:
+				id: pl4
+			FarmPlot:
+				id: pl5
 
-	FarmPlot:
-		id: pl5
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width /3 + self.parent.width / 24
-		y: self.parent.y + self.parent.height / 3 + self.parent.height / 24
+			FarmPlot:
+				id: pl6
 
-	FarmPlot:
-		id: pl6
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width * 2 /3 + self.parent.width / 24
-		y: self.parent.y + self.parent.height / 3 + self.parent.height / 24
+			FarmPlot:
+				id: pl7
 
-	FarmPlot:
-		id: pl7
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width / 24
-		y: self.parent.y + self.parent.height * 2 / 3 + self.parent.height / 24
+			FarmPlot:
+				id: pl8
 
-	FarmPlot:
-		id: pl8
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width /3 + self.parent.width / 24
-		y: self.parent.y + self.parent.height * 2 / 3 + self.parent.height / 24
-
-	FarmPlot:
-		id: pl9
-		size: self.parent.width / 4 , self.parent.height / 4
-		x: self.parent.x + self.parent.width * 2 / 3 + self.parent.width / 24
-		y: self.parent.y + self.parent.height * 2 / 3 + self.parent.height / 24
+			FarmPlot:
+				id: pl9
 
 
