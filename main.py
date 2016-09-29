@@ -61,10 +61,10 @@ class VeggieScreen(Screen):
 
     def on_touch_move(self,dt):
 
-        sm.transition.direction='up'
-        sm.current = sm.next()
+        self.parent.transition.direction='up'
+        self.parent.current = self.parent.next()
 
-class FarmGame(Screen):
+class FarmScreen(Screen):
 
     farm = ObjectProperty(None)
 
@@ -73,23 +73,30 @@ class FarmGame(Screen):
 
     def on_touch_move(self,dt):
 
-        sm.transition.direction='right'
-        sm.current = sm.next()
+        self.parent.transition.direction='right'
+        self.parent.current = self.parent.next()
 
-sm = ScreenManager(transition=SlideTransition())
+class FarmGame(ScreenManager):
+
+    def __init__(self):
+
+        super(FarmGame,self).__init__(transition=SlideTransition())
+
+        self.farm_screen = FarmScreen(name='game')
+        self.veggie_screen = VeggieScreen(name='veggie')
+
+        self.add_widget(self.farm_screen)
+        self.add_widget(self.veggie_screen)
+        
+    def update(self,dt):
+        pass
 
 class FarmApp(App):
     
     def build(self):
-
-        game = FarmGame(name='game')
-        veggie = VeggieScreen(name='veggie')
-
-        sm.add_widget(game)
-        sm.add_widget(veggie)
-
+        game = FarmGame()
         Clock.schedule_interval(game.update,1.0)
-        return sm
+        return game
 
 if __name__ == "__main__":
     FarmApp().run()

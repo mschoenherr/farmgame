@@ -8,23 +8,22 @@
 			Rectangle:
 				size: self.size
 				pos: self.pos
-<FarmGame>:
+<FarmScreen>:
 
 	farm: farmfield
 
 	GridLayout:
 
-		size: root.size
-		pos: root.pos
-
 		cols: 1
 		rows: 2
 
-		Widget:
+		Image:
 			size_hint_x: 1.0
 			size_hint_y: 0.33
+			allow_stretch: True
+			keep_ration: True
 			width: self.parent.width
-			height: self.parent.height * 1/3
+			height: self.parent.width / self.image_ratio
 
 			canvas:
 				Rectangle:
@@ -33,8 +32,6 @@
 					source: "images/sky2.png"
 
 		FarmField:
-			size_hint_x: 1.0
-			size_hint_y: 0.66
 			width: self.parent.width
 			height: self.parent.height * 2/3
 			id: farmfield
