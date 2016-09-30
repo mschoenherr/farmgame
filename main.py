@@ -11,14 +11,7 @@ from plant import *
 class FarmPlot(Widget):
 
     plant = ObjectProperty(Plant(),True)
-    water_level = BoundedNumericProperty(50,min=0,errorvalue=0)
-    sun_level = BoundedNumericProperty(0, min=0,errorvalue=0)
-    phosphor_level = BoundedNumericProperty(100,min=0,max=100,errorvalue=100)
-    nitrogen_level = BoundedNumericProperty(100,min=0,max=100,errorvalue=100)
-    kalium_level = BoundedNumericProperty(100,min=0,max=100,errorvalue=100)
-    bug_level = BoundedNumericProperty(100,min=0,max=100,errorvalue=100)
-    contamination_level = BoundedNumericProperty(100,min=0,max=100,errorvalue=100)
-  
+    phosphor_level = 0  
     def on_touch_down(self,touch):
 
         if self.collide_point(*touch.pos) and touch.is_double_tap:
@@ -29,10 +22,8 @@ class FarmPlot(Widget):
 
     def update(self,dt):
 
-        self.phosphor_level = self.phosphor_level - dt * self.plant.phosphor_dt
-        self.nitrogen_level = self.nitrogen_level - dt * self.plant.nitrogen_dt
-        self.kalium_level = self.kalium_level - dt * self.plant.nitrogen_dt
-
+        pass
+        
     
 class FarmField(Widget):
 
