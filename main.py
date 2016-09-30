@@ -19,9 +19,10 @@ class FarmPlot(Widget):
                 self.plant = carrots
             else:
                 self.plant = Plant()
+        
+        app.root.dispatch('on_plot_touched',0)
 
     def update(self,dt):
-
         pass
         
     
@@ -69,7 +70,7 @@ class FarmScreen(Screen):
 
 class FarmGame(ScreenManager):
 
-    def __init__(self):
+    def __init__(self,**kwargs):
 
         super(FarmGame,self).__init__(transition=SlideTransition())
 
@@ -78,8 +79,14 @@ class FarmGame(ScreenManager):
 
         self.add_widget(self.farm_screen)
         self.add_widget(self.veggie_screen)
+
+        self.register_event_type('on_plot_touched')
+        super(FarmGame,self).__init__(**kwargs)
         
     def update(self,dt):
+        pass
+
+    def on_plot_touched(self,index):
         pass
 
 class FarmApp(App):
@@ -90,7 +97,8 @@ class FarmApp(App):
         return game
 
 if __name__ == "__main__":
-    FarmApp().run()
+    app = FarmApp()
+    app.run()
 
 
 
