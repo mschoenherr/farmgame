@@ -1,21 +1,17 @@
+from kivy.properties import BoundedNumericProperty, ObjectProperty, ListProperty
 from plant import *
 from weather import Weather
 from date import GameDate
 
 class GameState():
 
-    def __init__(self):
+    plots = ListProperty()
 
-        self.plots = [ Plant() for i in range(9)]
+    plots = [Plant() for ind in range(9)]
 
-        self.money = 100
+    plant_selection = ObjectProperty(None,True)
+    plant_selection = carrots
 
-        self.plant_selection = carrots
-
-        self.date = GameDate()
-
-        self.weather = Weather(self.date)
-
-    def update(self,dt)
+    def update(self,dt):
         pass
         
