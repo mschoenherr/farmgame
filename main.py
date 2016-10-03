@@ -1,29 +1,31 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ReferenceListProperty
+from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ListProperty
 from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
+from kivy.uix.gridlayout import GridLayout
 
 from plant import Plant
 from model import GameState
 
-class FarmPlot(Widget):
+class FarmPlot(Image):
 
-    def __init__(self,ind):
-
-        index = NumericProperty(0)
-        index = ind
+    index = NumericProperty(0)
 
     def on_touch_down(self,touch):
-
-        if self.collide_point(*touch.pos) and touch.is_double_tap:
+    
+        if self.collide_point(*touch.pos):
             app.root.dispatch('on_plot_touched',self.index)
 
-class FarmField(Widget):
+    def on_touch_up(self,touch):
 
-    plots = ObjectProperty(None)
+        if self.collide_point(*touch.pos):
+            app.root.dispatch('on_plot_released',self.index)
+
+class FarmField(GridLayout):
+    pass
 
 class VeggieScreen(Screen):
 
@@ -35,7 +37,7 @@ class VeggieScreen(Screen):
 
 class FarmScreen(Screen):
 
-    farm = ObjectProperty(None,True)
+    farm = ObjectProperty(None)
 
     def on_touch_move(self,dt):
 
@@ -46,30 +48,42 @@ class FarmGame(ScreenManager):
 
     def __init__(self):
 
-        self.state = GameState()
+        self.state = ObjectProperty(GameState(),True)
+        self.last_plot_touched = NumericProperty(-1)
 
         super(FarmGame,self).__init__(transition=SlideTransition())
 
         self.farm_screen = FarmScreen(name='game')
-
-        for ind, plot in enumerate(self.state.plots):
-            # reference plots somewhere and add plots with ind
-            pass
 
         self.veggie_screen = VeggieScreen(name='veggie')
 
         self.add_widget(self.farm_screen)
         self.add_widget(self.veggie_screen)
 
-        # Calling EventDispatcher constructor
         self.register_event_type('on_plot_touched')
+        self.register_event_type('on_plot_released')
 
         
     def update(self,dt):
         pass
 
+    def on_touch_move(self,touch):
+
+        if abs(touch.ox - touch.x) > 96:
+            print "swipe"
+            return True
+        else:
+            return False
+
     def on_plot_touched(self,index):
-        pass
+        print "plot touched: " + str(index)
+
+    def on_plot_released(self,index):
+
+        if self.last_plot_touched == index:
+            print "plot touched: " + str(index)
+        else:
+            self.last_plot_touched = index
 
 class FarmApp(App):
     
@@ -81,8 +95,3 @@ class FarmApp(App):
 if __name__ == "__main__":
     app = FarmApp()
     app.run()
-
-
-
-
-

@@ -9,9 +9,6 @@
 				size: self.size
 				pos: self.pos
 <FarmScreen>:
-
-	farm: farmfield
-
 	GridLayout:
 
 		rows: 2
@@ -27,85 +24,56 @@
 			height: self.parent.width / self.image_ratio
 			source: "images/sky2.png"
 
-		FarmField:
+		AnchorLayout:
 			size_hint_x: 1.0
 			size_hint_y: 0.66
-			id: farmfield
+
+			canvas: 
+				Rectangle:
+					source: "images/meaddow_bg.png"
+					size: self.size
+
+			FarmField:
+				id: farm
 
 
 <FarmPlot>:
 
-	canvas:
-		Rectangle: 
-			source: "images/" + str(self.plant.name) + ".png"
-			size: self.size
-			pos: self.pos	
-	Label:
-		text: str(trunc(self.parent.phosphor_level))
-		size: self.parent.size
-		pos: self.parent.pos
-
+	source: "images/empty.png"
 
 <FarmField>:
 
-	plot1: pl1
-	plot2: pl2
-	plot3: pl3
+	canvas:
+		Rectangle:
+			size: self.size
+			pos: self.pos
+			source: "images/meaddow.png"
 
-	plot4: pl4
-	plot5: pl5
-	plot6: pl6
-
-	plot7: pl7
-	plot8: pl8
-	plot9: pl9
+	padding: 32
+	spacing: 32
 	
-	AnchorLayout:
-		
-		
-		size: self.parent.size
+	rows: 3
+	cols: 3
 
-		GridLayout:
-			canvas:
-				Rectangle:
-					size: self.size
-					pos: self.pos
-					source: "images/meaddow.png"
+	size_hint: None, None
+	height: min(self.parent.width,self.parent.height)
+	width: min(self.parent.width,self.parent.height)
 
-			padding: 32
-			spacing: 32
-			
-			size_hint: None, None
-			height: min(self.parent.width,self.parent.height)
-			width: min(self.parent.width,self.parent.height)
-
-			rows: 3
-			cols: 3	
-
-			FarmPlot:
-				id: pl1
-
-			FarmPlot:
-				id: pl2
-
-			FarmPlot:
-				id: pl3
-
-			FarmPlot:
-				id: pl4
-			FarmPlot:
-				id: pl5
-
-			FarmPlot:
-				id: pl6
-
-			FarmPlot:
-				id: pl7
-
-			FarmPlot:
-				id: pl8
-
-			FarmPlot:
-				id: pl9
-
-
+	FarmPlot:
+		index: 0
+	FarmPlot:
+		index: 1
+	FarmPlot:
+		index: 2
+	FarmPlot:
+		index: 3
+	FarmPlot:
+		index: 4
+	FarmPlot:
+		index: 5
+	FarmPlot:
+		index: 6
+	FarmPlot:
+		index: 7
+	FarmPlot:
+		index: 8
