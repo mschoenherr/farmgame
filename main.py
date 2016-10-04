@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ListProperty
+from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ListProperty, BooleanProperty
 from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
@@ -15,14 +15,15 @@ class FarmPlot(Image):
     index = NumericProperty(0)
 
     def on_touch_down(self,touch):
-    
+
         if self.collide_point(*touch.pos):
-            app.root.dispatch('on_plot_touched',self.index)
+
+            touch.grab(self)
 
     def on_touch_up(self,touch):
 
-        if self.collide_point(*touch.pos):
-            app.root.dispatch('on_plot_released',self.index)
+        if self.collide_point(*touch.pos) and touch.grab_current is self:
+            app.root.dispatch('on_plot_touched',self.index)
 
 class FarmField(GridLayout):
     pass
@@ -49,7 +50,7 @@ class FarmGame(ScreenManager):
     def __init__(self):
 
         self.state = ObjectProperty(GameState(),True)
-        self.last_plot_touched = NumericProperty(-1)
+        self.swiped = BooleanProperty(False)
 
         super(FarmGame,self).__init__(transition=SlideTransition())
 
@@ -61,29 +62,27 @@ class FarmGame(ScreenManager):
         self.add_widget(self.veggie_screen)
 
         self.register_event_type('on_plot_touched')
-        self.register_event_type('on_plot_released')
-
         
     def update(self,dt):
         pass
 
     def on_touch_move(self,touch):
 
-        if abs(touch.ox - touch.x) > 96:
-            print "swipe"
+        if touch.ox - touch.x > self.width/4:
+            print "swipe left"
             return True
-        else:
-            return False
+        elif touch.x - touch.ox > self.width/4:
+            print "swipe right"
+            return True
+        elif touch.oy - touch.y > self.width/4:
+            print "swipe down"
+            return True
+        elif touch.y - touch.oy > self.width/4:
+            print "swipe up"
+            return True
 
     def on_plot_touched(self,index):
         print "plot touched: " + str(index)
-
-    def on_plot_released(self,index):
-
-        if self.last_plot_touched == index:
-            print "plot touched: " + str(index)
-        else:
-            self.last_plot_touched = index
 
 class FarmApp(App):
     
