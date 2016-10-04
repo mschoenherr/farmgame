@@ -23,6 +23,7 @@ class FarmPlot(Image):
     def on_touch_up(self,touch):
 
         if self.collide_point(*touch.pos) and touch.grab_current is self:
+            touch.ungrab(self)
             app.root.dispatch('on_plot_touched',self.index)
 
 class FarmField(GridLayout):
