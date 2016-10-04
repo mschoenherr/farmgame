@@ -48,10 +48,9 @@ class FarmScreen(Screen):
 
 class FarmGame(ScreenManager):
 
-    def __init__(self):
+    swiped = BooleanProperty(False)
 
-        self.state = ObjectProperty(GameState(),True)
-        self.swiped = BooleanProperty(False)
+    def __init__(self):
 
         super(FarmGame,self).__init__(transition=SlideTransition())
 
@@ -83,10 +82,16 @@ class FarmGame(ScreenManager):
             return True
 
     def on_plot_touched(self,index):
-        print "plot touched: " + str(index)
+       
+        # this is completely hackish but works without too much fuss
+        # note that objectproperties only propagate their updates if they are assigned a new value
+        # have a look at model.py gamestate always returns a copy of itself
+        app.game_state = app.game_state.plot_touched(index)
 
 class FarmApp(App):
     
+    game_state = ObjectProperty(GameState(),True)
+
     def build(self):
         game = FarmGame()
         Clock.schedule_interval(game.update,1.0)
