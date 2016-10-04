@@ -3,7 +3,8 @@ from plant import *
 from weather import Weather
 from date import GameDate
 from copy import copy
-
+# always return copies of yourself so that object reference to gamestate is updated
+# there might be a better way using dispatch but i haven't got that working, yet
 class GameState(ObjectProperty):
 
     plots = ListProperty()
