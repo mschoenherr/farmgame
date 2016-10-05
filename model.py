@@ -20,7 +20,8 @@ class GameState():
 
         self.plots = [Plot() for ind in range(9)]
         self.available_plants = plant_dict
-        self.plant_selection = "Carrots"
+        self.all_plants = plant_list
+        self.plant_selection = self.all_plants[0]
         self.date = GameDate()
         self.weather = Weather()
         self.money = 100
@@ -58,6 +59,16 @@ class GameState():
         else:
 
             self.harvest_plot(index)
+
+        return copy(self)
+
+    def cycle_plant_list(self):
+
+        last = self.all_plants.pop()
+
+        self.all_plants = [last] + self.all_plants
+
+        self.plant_selection = self.all_plants[0]
 
         return copy(self)
 

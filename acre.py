@@ -60,3 +60,4 @@ carrots = Plant("Carrots",10,20,10,100.0)
 potatoes = Plant("Potatoes",20,10,10,100.0)
 
 plant_dict = {"Carrots" : carrots, "Potatoes": potatoes}
+plant_list = ["Carrots","Potatoes"]

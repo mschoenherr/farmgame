@@ -10,7 +10,22 @@ from kivy.uix.gridlayout import GridLayout
 from plant import Plant
 from model import GameState
 
-class FarmPlot(Image):
+class PlantSelection(Widget):
+
+    def on_touch_down(self,touch):
+
+        if self.collide_point(*touch.pos):
+
+            touch.grab(self)
+
+    def on_touch_up(self,touch):
+
+        if self.collide_point(*touch.pos) and touch.grab_current is self:
+
+            touch.ungrab(self)
+            app.root.dispatch('on_plant_selection')
+
+class FarmPlot(Widget):
 
     index = NumericProperty(0)
 
@@ -62,6 +77,7 @@ class FarmGame(ScreenManager):
         self.add_widget(self.veggie_screen)
 
         self.register_event_type('on_plot_touched')
+        self.register_event_type('on_plant_selection')
         
     def update(self,dt):
         pass
@@ -90,6 +106,10 @@ class FarmGame(ScreenManager):
         app.game_state = app.game_state.sell("Carrots")
         print app.game_state.storage
         print app.game_state.money
+
+    def on_plant_selection(self):
+            
+        app.game_state.cycle_plant_list()
 
 class FarmApp(App):
     

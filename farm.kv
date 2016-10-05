@@ -14,16 +14,13 @@
 		rows: 2
 		cols: 1
 
+		AnchorLayout:
 
-		Image:
 			size_hint_x: 1.0
 			size_hint_y: 0.33
-			allow_stretch: True
-			keep_ratio: True
-			width: self.parent.width
-			height: self.parent.width / self.image_ratio
-			source: "images/sky2.png"
-
+		
+			PlantSelection:
+			
 		AnchorLayout:
 			size_hint_x: 1.0
 			size_hint_y: 0.66
@@ -38,8 +35,11 @@
 
 
 <FarmPlot>:
-
-	source: "images/empty.png"
+	canvas:
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			source: "images/" + app.game_state.plots[self.index].plant.name + ".png"
 
 <FarmField>:
 
@@ -77,3 +77,10 @@
 		index: 7
 	FarmPlot:
 		index: 8
+
+<PlantSelection>:
+
+	canvas:
+		Rectangle:
+			pos: self.pos
+			source: "images/" + app.game_state.plant_selection + ".png"
