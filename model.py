@@ -19,14 +19,15 @@ class GameState():
     def __init__(self):
 
         self.plots = [Plot() for ind in range(9)]
-        self.available_plants = plant_list
-        self.plant_selection = 0
+        self.available_plants = plant_dict
+        self.plant_selection = "Carrots"
         self.date = GameDate()
         self.weather = Weather()
         self.money = 100
 
         # storage values are pairs of (amount,days_to_perish)
         self.storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200}}
+        self.prices = {"Carrots" : {"buy" : 25, "sell": 30},"Potatoes" : {"buy" : 30, "sell": 40}}
 
     def update(self):
 
@@ -46,7 +47,13 @@ class GameState():
 
         if self.plots[index].plant.name == "empty":
 
-            self.plots[index].sow(self.available_plants[self.plant_selection])
+            seed = self.available_plants[self.plant_selection]
+
+            if self.money >= self.prices[seed.name]["buy"]:
+
+                self.plots[index].sow(seed)
+
+                self.money -= self.prices[seed.name]["buy"]
 
         else:
 
@@ -67,3 +74,16 @@ class GameState():
         for key in self.storage:
 
                 self.storage[key]["amount"] = perish_func(self.storage[key]["amount"],self.storage[key]["days"])
+
+    def sell(self,vegetable_name):
+
+        amount = self.storage[vegetable_name]["amount"]
+
+        max_gain = self.available_plants[vegetable_name].max_gain
+
+        price_per_ton = self.prices[vegetable_name]["sell"]
+
+        self.storage[vegetable_name]["amount"] = 0.0
+
+        self.money += price_per_ton * amount / max_gain
+        return copy(self)
