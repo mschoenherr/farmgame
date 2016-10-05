@@ -3,6 +3,8 @@ from acre import *
 from weather import Weather
 from date import GameDate
 from copy import copy
+
+from util import perish_func
 # always return copies of yourself so that object reference to gamestate is updated
 # there might be a better way using dispatch but i haven't got that working, yet
 
@@ -21,6 +23,7 @@ class GameState():
         self.plant_selection = 0
         self.date = GameDate()
         self.weather = Weather()
+        self.money = 100
 
         # storage values are pairs of (amount,days_to_perish)
         self.storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200}}
@@ -34,6 +37,8 @@ class GameState():
         self.weather.update(self.date)
 
         self.date.update()
+
+        self.perish_storage()
 
         return copy(self)
 
@@ -61,4 +66,4 @@ class GameState():
 
         for key in self.storage:
 
-                self.storage[key] += perish_func(self.storage[key]["amount"],self.storage[key]["days"])
+                self.storage[key]["amount"] = perish_func(self.storage[key]["amount"],self.storage[key]["days"])
