@@ -94,8 +94,12 @@ class FarmApp(App):
 
     def build(self):
         game = FarmGame()
-        Clock.schedule_interval(game.update,1.0)
+        Clock.schedule_interval(self.update,1.0)
         return game
+
+    def update(self,dt):
+
+        self.game_state = self.game_state.update(dt)
 
 if __name__ == "__main__":
     app = FarmApp()

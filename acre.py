@@ -1,4 +1,4 @@
-from kivy.properties import NumericProperty, StringProperty
+from kivy.properties import NumericProperty, StringProperty, ObjectProperty, BoundedNumericProperty
 from util import bet_zero_hun
 class Plant():
 
@@ -15,6 +15,26 @@ class Plant():
         self.nitrogen = nit
         self.kalium = kal
         self.max_gain = max_gain
+
+    def update(self,dt,weather):
+        pass
+
+class Plot():
+
+    plant = ObjectProperty(None)
+    kalium = BoundedNumericProperty(75,min=0,max=100,errorhandler=bet_zero_hun)
+    nitrogen = BoundedNumericProperty(75,min=0,max=100,errorhandler=bet_zero_hun)
+    phosphor = BoundedNumericProperty(75,min=0,max=100,errorhandler=bet_zero_hun)
+    contamination = BoundedNumericProperty(10,min=0,max=100,errorhandler=bet_zero_hun)
+    bug_level = BoundedNumericProperty(0,min=0,max=100,errorhandler=bet_zero_hun)
+
+    def __init__(self,plant=Plant()):
+
+        self.plant = plant
+
+    def update(self,dt,weather):
+        pass
+
 
 carrots = Plant("carrots",0.01,0.01,0.01,100)
 

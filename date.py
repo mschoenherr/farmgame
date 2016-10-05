@@ -2,12 +2,12 @@ class GameDate():
 
     def __init__(self):
 
-        self.intdate = 0
+        self.intdate = 0 
 
     def getStringRep():
 
-        return self.intdate
+        return str(self.intdate)
 
-    def advance():
+    def update(self):
 
-        self.intdate = (self.intdate +1) % 365 
+        self.intdate = (self.intdate + 1) % 365 
