@@ -86,7 +86,8 @@ class FarmGame(ScreenManager):
         # this is completely hackish but works without too much fuss
         # note that objectproperties only propagate their updates if they are assigned a new value
         # have a look at model.py gamestate always returns a copy of itself
-        app.game_state = app.game_state.plot_touched(index)
+        app.game_state = app.game_state.activate_plot(index)
+        print app.game_state.storage
 
 class FarmApp(App):
     
@@ -99,7 +100,7 @@ class FarmApp(App):
 
     def update(self,dt):
 
-        self.game_state = self.game_state.update(dt)
+        self.game_state = self.game_state.update()
 
 if __name__ == "__main__":
     app = FarmApp()

@@ -9,7 +9,7 @@ class Weather():
         self.temperature = randint(-13,41)
 
 
-    def update(self,dt,date):
+    def update(self,date):
 
         self.sun = randint(0,100)
         self.rain = randint(0,100)

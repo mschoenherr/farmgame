@@ -1,41 +1,62 @@
-from kivy.properties import NumericProperty, StringProperty, ObjectProperty, BoundedNumericProperty
 from util import bet_zero_hun
+
+# some global variables
+
+g_reg = -10
+g_tempr = range(10,30)
+g_hum = range(25,60)
+g_days = 120
+
 class Plant():
 
-    name = StringProperty("empty")
-    max_gain = NumericProperty(0)
-    kalium = NumericProperty(0)
-    nitrogen = NumericProperty(0)
-    phosphor = NumericProperty(0)
-
-    def __init__(self,name = "empty", phos= -0.001, nit = -0.001, kal = -0.001, max_gain=0):
+    def __init__(self,name = "empty", phos= g_reg, nit = g_reg, kal = g_reg, max_gain=0.0,tempr = g_tempr,hum=g_hum,days=g_days):
 
         self.name = name
         self.phosphor = phos
         self.nitrogen = nit
         self.kalium = kal
         self.max_gain = max_gain
-
-    def update(self,dt,weather):
-        pass
+        self.temp_range = tempr
+        self.humidity_range = hum
+        self.days_to_ripeness = days
 
 class Plot():
 
-    plant = ObjectProperty(None)
-    kalium = BoundedNumericProperty(75,min=0,max=100,errorhandler=bet_zero_hun)
-    nitrogen = BoundedNumericProperty(75,min=0,max=100,errorhandler=bet_zero_hun)
-    phosphor = BoundedNumericProperty(75,min=0,max=100,errorhandler=bet_zero_hun)
-    contamination = BoundedNumericProperty(10,min=0,max=100,errorhandler=bet_zero_hun)
-    bug_level = BoundedNumericProperty(0,min=0,max=100,errorhandler=bet_zero_hun)
+    def __init__(self,plant=Plant(),phos = 75, nit = 75, kal = 75, pesti = 10, bugs = 0):
 
-    def __init__(self,plant=Plant()):
+        self.plant = plant
+        self.kalium = kal
+        self.nitrogen = nit
+        self.phosphor = phos
+        self.pesticide = pesti
+        self.bug_level = bugs
+        self.gain = 0.0
+        self.days_of_growth = 0
+
+    def update(self,date,weather):
+
+        self.gain += self.plant.max_gain/self.plant.days_to_ripeness
+        self.days_of_growth += 1
+
+    def harvest(self):
+
+        amount = self.gain
+        name = self.plant.name
+
+        self.gain = 0
+        self.days_of_growth = 0 
+
+        self.plant = Plant()
+
+        return {"vegetable": name, "amount": amount}
+
+    def sow(self,plant):
 
         self.plant = plant
 
-    def update(self,dt,weather):
-        pass
 
+carrots = Plant("Carrots",10,20,10,100.0)
 
-carrots = Plant("carrots",0.01,0.01,0.01,100)
+potatoes = Plant("Potatoes",20,10,10,100.0)
 
-potatoes = Plant("potatoes",0.02,0.02,0.02,300)
+plant_list = [carrots,potatoes]
