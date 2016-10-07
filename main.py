@@ -48,23 +48,13 @@ class FarmField(GridLayout):
 class FarmScreen(Screen):
 
     farm = ObjectProperty(None)
-
-    def on_touch_move(self,dt):
-
-        self.parent.transition.direction='right'
-        self.parent.current = self.parent.next()
-
+    
 class SellItem(GridLayout):
 
      name = StringProperty("Carrots")
 
 class SellScreen(Screen):
-
-
-    def on_touch_move(self,dt):
-
-        self.parent.transition.direction='up'
-        self.parent.current = self.parent.next()
+    pass
 
 class FarmGame(ScreenManager):
 
@@ -129,22 +119,20 @@ class FarmGame(ScreenManager):
             if touch.ox - touch.x > self.width/4:
 
                 self.switch_screen('left')
-                return True
 
             elif touch.x - touch.ox > self.width/4:
 
                 self.switch_screen('right')
-                return True
 
             elif touch.oy - touch.y > self.width/4:
 
                 self.switch_screen('down')
-                return True
 
             elif touch.y - touch.oy > self.width/4:
 
                 self.switch_screen('up')
-                return True
+
+        return super(FarmGame,self).on_touch_move(touch)
             
     def on_plot_touched(self,index):
        
