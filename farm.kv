@@ -1,13 +1,33 @@
 #:kivy 1.9.1
 #:import trunc math.trunc
 
-<VeggieScreen>:
+<SellScreen>:
+	
+	GridLayout:
 
-	Widget:
-		canvas:
-			Rectangle:
-				size: self.size
-				pos: self.pos
+		rows: 7
+		cols: 1
+
+		SellItem:
+			name: "Carrots"
+
+		SellItem:
+			name: "Potatoes"
+
+<SellItem>:
+
+	rows:1
+	cols:3
+
+	Image: 
+		source: "images/" + self.parent.name + ".png"
+	
+	Label:
+		text: str(app.game_state.prices[self.parent.name]["buy"]) + "/acre"
+	Label:
+		text: str(app.game_state.prices[self.parent.name]["sell"]) + "/ton"
+
+	
 <FarmScreen>:
 	GridLayout:
 

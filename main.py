@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ListProperty, BooleanProperty
+from kivy.properties import NumericProperty, ObjectProperty, BoundedNumericProperty, ListProperty, BooleanProperty, StringProperty
 from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
@@ -44,13 +44,6 @@ class FarmPlot(Widget):
 class FarmField(GridLayout):
     pass
 
-class VeggieScreen(Screen):
-
-
-    def on_touch_move(self,dt):
-
-        self.parent.transition.direction='up'
-        self.parent.current = self.parent.next()
 
 class FarmScreen(Screen):
 
@@ -59,6 +52,18 @@ class FarmScreen(Screen):
     def on_touch_move(self,dt):
 
         self.parent.transition.direction='right'
+        self.parent.current = self.parent.next()
+
+class SellItem(GridLayout):
+
+     name = StringProperty("Carrots")
+
+class SellScreen(Screen):
+
+
+    def on_touch_move(self,dt):
+
+        self.parent.transition.direction='up'
         self.parent.current = self.parent.next()
 
 class FarmGame(ScreenManager):
@@ -71,7 +76,7 @@ class FarmGame(ScreenManager):
 
         self.farm_screen = FarmScreen(name='game')
 
-        self.veggie_screen = VeggieScreen(name='veggie')
+        self.veggie_screen = SellScreen(name='sell')
 
         self.add_widget(self.farm_screen)
         self.add_widget(self.veggie_screen)
@@ -82,30 +87,72 @@ class FarmGame(ScreenManager):
     def update(self,dt):
         pass
 
+    def on_touch_down(self,touch):
+
+        self.swiped = False
+
+        return super(FarmGame,self).on_touch_down(touch)
+
+
+    def switch_screen(self,direction):
+
+        ind_old = self.screen_names.index(self.current)
+
+        if direction == 'left':
+            
+            ind_new = (ind_old + 1) % len(self.screen_names)
+
+        elif direction == 'right':
+
+            ind_new = (ind_old + 1) % len(self.screen_names)
+
+        elif direction == 'up':
+
+            ind_new = (ind_old + 1) % len(self.screen_names)
+
+        elif direction == 'down':
+
+            ind_new = (ind_old + 1) % len(self.screen_names)
+
+        else:
+
+            ind_new = ind_old
+
+        self.transition.direction = direction
+        self.swiped = True
+        self.current = self.screen_names[ind_new]
+
     def on_touch_move(self,touch):
 
-        if touch.ox - touch.x > self.width/4:
-            print "swipe left"
-            return True
-        elif touch.x - touch.ox > self.width/4:
-            print "swipe right"
-            return True
-        elif touch.oy - touch.y > self.width/4:
-            print "swipe down"
-            return True
-        elif touch.y - touch.oy > self.width/4:
-            print "swipe up"
-            return True
+        if not self.swiped:
 
+            if touch.ox - touch.x > self.width/4:
+
+                self.switch_screen('left')
+                return True
+
+            elif touch.x - touch.ox > self.width/4:
+
+                self.switch_screen('right')
+                return True
+
+            elif touch.oy - touch.y > self.width/4:
+
+                self.switch_screen('down')
+                return True
+
+            elif touch.y - touch.oy > self.width/4:
+
+                self.switch_screen('up')
+                return True
+            
     def on_plot_touched(self,index):
        
         # this is completely hackish but works without too much fuss
         # note that objectproperties only propagate their updates if they are assigned a new value
         # have a look at model.py gamestate always returns a copy of itself
         app.game_state = app.game_state.activate_plot(index)
-        app.game_state = app.game_state.sell("Carrots")
-        print app.game_state.storage
-        print app.game_state.money
+        app.game_state = app.game_state.sell(app.game_state.plant_selection)
 
     def on_plant_selection(self):
             

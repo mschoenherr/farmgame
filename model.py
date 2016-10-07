@@ -28,7 +28,7 @@ class GameState():
 
         # storage values are pairs of (amount,days_to_perish)
         self.storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200}}
-        self.prices = {"Carrots" : {"buy" : 25, "sell": 30},"Potatoes" : {"buy" : 30, "sell": 40}}
+        self.prices = {"Carrots" : {"buy" : 25, "sell": 0.3},"Potatoes" : {"buy" : 30, "sell": 0.4}}
 
     def update(self):
 
