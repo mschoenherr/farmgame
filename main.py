@@ -81,10 +81,12 @@ class FarmGame(ScreenManager):
         self.upgrade_screen = UpgradeScreen(name='upgrade')
 
         self.add_widget(self.title_screen)
+        self.add_widget(self.upgrade_screen)
         self.add_widget(self.farm_screen)
         self.add_widget(self.sell_screen)
         self.add_widget(self.achievement_screen)
-        self.add_widget(self.upgrade_screen)
+
+        print self.screen_names
 
         self.register_event_type('on_plot_touched')
         self.register_event_type('on_plant_selection')
@@ -109,15 +111,15 @@ class FarmGame(ScreenManager):
 
         elif direction == 'right':
 
-            ind_new = (ind_old + 1) % len(self.screen_names)
+            ind_new = (ind_old + 4) % len(self.screen_names)
 
         elif direction == 'up':
 
-            ind_new = (ind_old + 1) % len(self.screen_names)
+            ind_new = (ind_old + 2) % len(self.screen_names)
 
         elif direction == 'down':
 
-            ind_new = (ind_old + 1) % len(self.screen_names)
+            ind_new = (ind_old + 3) % len(self.screen_names)
 
         else:
 
