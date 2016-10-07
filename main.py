@@ -134,21 +134,23 @@ class FarmGame(ScreenManager):
             if touch.ox - touch.x > self.width/4:
 
                 self.switch_screen('left')
+                return True
 
             elif touch.x - touch.ox > self.width/4:
 
                 self.switch_screen('right')
+                return True
 
             elif touch.oy - touch.y > self.width/4:
 
                 self.switch_screen('down')
+                return True
 
             elif touch.y - touch.oy > self.width/4:
 
                 self.switch_screen('up')
+                return True
 
-        return super(FarmGame,self).on_touch_move(touch)
-            
     def on_plot_touched(self,index):
        
         # this is completely hackish but works without too much fuss
