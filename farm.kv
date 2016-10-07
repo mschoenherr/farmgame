@@ -1,6 +1,22 @@
 #:kivy 1.9.1
 #:import trunc math.trunc
 
+<TitleScreen>:
+
+	FloatLayout:
+
+		Widget:
+			width: min(self.parent.width,self.parent.height)
+			height: min(self.parent.width,self.parent.height)
+			
+			canvas:
+				Rectangle:
+					size: self.size
+					pos: self.pos
+					source: "images/Title.png"
+
+		Label:
+			text: "FarmGame"
 <SellScreen>:
 	
 	GridLayout:

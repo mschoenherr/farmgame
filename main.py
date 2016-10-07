@@ -56,6 +56,9 @@ class SellItem(GridLayout):
 class SellScreen(Screen):
     pass
 
+class TitleScreen(Screen):
+    pass
+
 class FarmGame(ScreenManager):
 
     swiped = BooleanProperty(False)
@@ -67,7 +70,9 @@ class FarmGame(ScreenManager):
         self.farm_screen = FarmScreen(name='game')
 
         self.veggie_screen = SellScreen(name='sell')
+        self.title_screen = TitleScreen(name='title')
 
+        self.add_widget(self.title_screen)
         self.add_widget(self.farm_screen)
         self.add_widget(self.veggie_screen)
 
@@ -110,7 +115,17 @@ class FarmGame(ScreenManager):
 
         self.transition.direction = direction
         self.swiped = True
-        self.current = self.screen_names[ind_new]
+        
+        if self.current == 'title':
+            app.update_event()
+
+        new_screen_name = self.screen_names[ind_new]
+
+        if new_screen_name == 'title':
+
+            app.update_event.cancel()
+
+        self.current = new_screen_name
 
     def on_touch_move(self,touch):
 
@@ -152,7 +167,8 @@ class FarmApp(App):
 
     def build(self):
         game = FarmGame()
-        Clock.schedule_interval(self.update,1.0)
+        self.update_event = Clock.schedule_interval(self.update,1.0)
+        self.update_event.cancel()
         return game
 
     def update(self,dt):
