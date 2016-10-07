@@ -157,11 +157,10 @@ class FarmGame(ScreenManager):
         # note that objectproperties only propagate their updates if they are assigned a new value
         # have a look at model.py gamestate always returns a copy of itself
         app.game_state = app.game_state.activate_plot(index)
-        app.game_state = app.game_state.sell(app.game_state.plant_selection)
 
     def on_plant_selection(self):
             
-        app.game_state.cycle_plant_list()
+        app.game_state = app.game_state.cycle_plant_list()
 
 class FarmApp(App):
     
