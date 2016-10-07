@@ -62,6 +62,9 @@ class TitleScreen(Screen):
 class AchievementScreen(Screen):
     pass
 
+class UpgradeScreen(Screen):
+    pass
+
 class FarmGame(ScreenManager):
 
     swiped = BooleanProperty(False)
@@ -75,11 +78,13 @@ class FarmGame(ScreenManager):
         self.sell_screen = SellScreen(name='sell')
         self.title_screen = TitleScreen(name='title')
         self.achievement_screen = AchievementScreen(name='achievement')
+        self.upgrade_screen = UpgradeScreen(name='upgrade')
 
         self.add_widget(self.title_screen)
         self.add_widget(self.farm_screen)
         self.add_widget(self.sell_screen)
         self.add_widget(self.achievement_screen)
+        self.add_widget(self.upgrade_screen)
 
         self.register_event_type('on_plot_touched')
         self.register_event_type('on_plant_selection')
