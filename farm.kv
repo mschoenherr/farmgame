@@ -53,11 +53,13 @@
 <SellItem>:
 
 	rows:1
-	cols:3
+	cols:4
 
 	Image: 
 		source: "images/" + self.parent.name + ".png"
 	
+	Label: 
+		text: "Storage: "+ str(app.game_state.storage[self.parent.name]["amount"])
 	Label:
 		text: str(app.game_state.prices[self.parent.name]["buy"]) + "/acre"
 	Label:
