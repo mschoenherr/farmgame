@@ -7,7 +7,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
 
-from plant import Plant
 from model import GameState
 
 class PlantSelection(Widget):
