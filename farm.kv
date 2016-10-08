@@ -63,6 +63,18 @@
 	Label:
 		text: str(app.game_state.prices[self.parent.name]["sell"]) + "/ton"
 
+<WeatherDisplay>:
+
+	rows: 1
+	cols: 3
+
+	Label:
+		text: "Sun:" + str(app.game_state.weather.sun) + "/" + str(app.game_state.weather.sun_tendency)
+	Label:
+		text: "Rain:" + str(app.game_state.weather.rain) + "/" + str(app.game_state.weather.rain_tendency)
+	Label:
+		text: "T:" + str(app.game_state.weather.temperature) + "/" + str(app.game_state.weather.temperature_tendency) + "°C"
+
 	
 <FarmScreen>:
 	GridLayout:
@@ -84,8 +96,7 @@
 			Label:
 				text: app.game_state.date.getStringRep()
 
-			Label:
-				text: "Sun:" + str(app.game_state.weather.sun) + " Rain: " + str(app.game_state.weather.rain) + " T:" + str(app.game_state.weather.temperature) + "°C"
+			WeatherDisplay:
 
 			PlantSelection:
 

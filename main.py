@@ -44,6 +44,8 @@ class FarmPlot(Widget):
 class FarmField(GridLayout):
     pass
 
+class WeatherDisplay(GridLayout):
+    pass
 
 class FarmScreen(Screen):
 
