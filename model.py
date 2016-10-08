@@ -34,7 +34,7 @@ class GameState():
 
         for plot in self.plots:
 
-            plot.update(self.date,self.weather)
+            plot.update(self.weather)
 
         self.weather.update(self.date)
 
@@ -56,7 +56,7 @@ class GameState():
 
                 self.money -= self.prices[seed.name]["buy"]
 
-        else:
+        elif self.plots[index].crop_is_ripe:
 
             self.harvest_plot(index)
 
