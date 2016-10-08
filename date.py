@@ -20,8 +20,11 @@ class GameDate():
             self.year += 1
             self.day = 0
             self.month = 0
+            self.intdate = 0
 
-        self.intdate = (self.intdate + 1) % 365 
+        else:
+
+            self.intdate += 1
 
         if self.intdate > self.date_ranges[self.month][1]:
 

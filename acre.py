@@ -69,7 +69,7 @@ class Plot():
         amount = self.gain
         name = self.plant.name
 
-        self.gain = 0
+        self.gain = 0.0
         self.days_of_growth = 0 
 
         self.plant = Plant()
@@ -99,7 +99,7 @@ class Plot():
         mean = pref[0]
         dev = pref[1]
 
-        result = max(0,pow(x-mean,2) - pow(dev,2))
+        result = 1.0 - max(0,min(1,pow((x-mean)/dev,2)))
 
         return result
 

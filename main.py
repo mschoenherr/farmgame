@@ -53,7 +53,19 @@ class FarmScreen(Screen):
     
 class SellItem(GridLayout):
 
-     name = StringProperty("Carrots")
+    name = StringProperty("Carrots")
+    
+    def on_touch_down(self,touch):
+
+        if self.collide_point(*touch.pos):
+
+            touch.grab(self)
+
+    def on_touch_up(self,touch):
+
+        if self.collide_point(*touch.pos) and touch.grab_current is self:
+            touch.ungrab(self)
+            app.root.dispatch('on_plant_sell',self.name)
 
 class SellScreen(Screen):
     pass
@@ -92,6 +104,7 @@ class FarmGame(ScreenManager):
 
         self.register_event_type('on_plot_touched')
         self.register_event_type('on_plant_selection')
+        self.register_event_type('on_plant_sell')
         
     def update(self,dt):
         pass
@@ -175,6 +188,10 @@ class FarmGame(ScreenManager):
     def on_plant_selection(self):
             
         app.game_state = app.game_state.cycle_plant_list()
+
+    def on_plant_sell(self,name):
+
+        app.game_state = app.game_state.sell(name)
 
 class FarmApp(App):
     
