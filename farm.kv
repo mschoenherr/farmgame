@@ -70,13 +70,25 @@
 		rows: 2
 		cols: 1
 
-		AnchorLayout:
+		GridLayout:
 
 			size_hint_x: 1.0
 			size_hint_y: 0.33
 		
+			rows: 2
+			cols: 3
+
+			Label:
+				text: str(app.game_state.money) + "€"
+
+			Label:
+				text: app.game_state.date.getStringRep()
+
+			Label:
+				text: "Sun:" + str(app.game_state.weather.sun) + " Rain: " + str(app.game_state.weather.rain) + " T:" + str(app.game_state.weather.temperature) + "°C"
+
 			PlantSelection:
-			
+
 		AnchorLayout:
 			size_hint_x: 1.0
 			size_hint_y: 0.66

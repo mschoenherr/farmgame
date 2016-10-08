@@ -3,8 +3,9 @@ class GameDate():
     def __init__(self):
 
         self.intdate = 0 
-        self.date_ranges = [[0,30],[31,59],[60,90],[91,110],[111,141],[142,171],[172,202],[203,233],[234,263],[264,294],[295,324],[325,365]]
-        #that is not correct, yet
+        self.year = 2016
+        self.date_ranges = [[0,30],[31,58],[59,89],[90,119],[120,150],[151,180],[181,211],[212,242],[243,272],[273,303],[304,333],[334,365]]
+        self.month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     def getStringRep(self):
 
@@ -13,14 +14,16 @@ class GameDate():
 
         for ind, rang in enumerate(self.date_ranges):
 
-            if self.intdate in rang:
+            if rang[0] <= self.intdate <= rang[1]:
 
-                month = ind + 1
+                month = self.month_names[ind]
                 day = self.intdate - min(rang) + 1
                 break
 
-        return str(day) + "/" + str(month)
+        return str(day) + "/" + month + "/" + str(self.year)
 
     def update(self):
+
+        if self.intdate == 365: self.year += 1
 
         self.intdate = (self.intdate + 1) % 365 
