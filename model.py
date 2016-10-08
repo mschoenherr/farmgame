@@ -96,6 +96,6 @@ class GameState():
 
         self.storage[vegetable_name]["amount"] = 0.0
 
-        self.money += price_per_ton * amount / max_gain
+        self.money += price_per_ton * amount
 
         return copy(self)
