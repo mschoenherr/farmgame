@@ -5,6 +5,7 @@ from date import GameDate
 from copy import copy
 
 from util import perish_func
+from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty
 # always return copies of yourself so that object reference to gamestate is updated
 # there might be a better way using dispatch but i haven't got that working, yet
 
@@ -20,15 +21,15 @@ class GameState():
 
         self.plots = [Plot() for ind in range(9)]
         self.available_plants = plant_dict
-        self.all_plants = plant_list
+        self.all_plants = g_plant_list
         self.plant_selection = self.all_plants[0]
         self.date = GameDate()
         self.weather = Weather()
-        self.money = 100
+        self.money = g_start_money
 
         # storage values are pairs of (amount,days_to_perish)
-        self.storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200}}
-        self.prices = {"Carrots" : {"buy" : 25, "sell": 0.3},"Potatoes" : {"buy" : 30, "sell": 0.4}}
+        self.storage = g_storage
+        self.prices = g_prices
 
     def update(self):
 
@@ -46,7 +47,7 @@ class GameState():
 
     def activate_plot(self,index):
 
-        if self.plots[index].plant.name == "empty":
+        if self.plots[index].plant.name == g_empty:
 
             seed = self.available_plants[self.plant_selection]
 

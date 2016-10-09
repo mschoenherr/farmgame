@@ -1,13 +1,14 @@
 from random import randint
 from math import trunc
+from constants import g_target_rain,g_target_sun,g_target_temperature,g_temp_bounds,g_sun_bounds,g_rain_bounds
 
 class Weather():
 
     def __init__(self):
 
-        self.target_temperature = [2,4,8,12,19,22,24,24,19,14,7,4]
-        self.target_rain = [50,30,38,50,25,60,60,80,45,70,90,30]
-        self.target_sun = [15,40,50,80,90,80,90,80,50,40,30,40]
+        self.target_temperature = g_target_temperature
+        self.target_rain = g_target_rain
+        self.target_sun = g_target_sun
 
         self.rain_tendency = 0
         self.sun_tendency = 0
@@ -34,7 +35,7 @@ class Weather():
         month = date.month
 
         det_trend = self.target_sun[month] - self.sun 
-        rand_trend = randint(0,100) - self.sun
+        rand_trend = randint(g_sun_bounds[0],g_sun_bounds[1]) - self.sun
         prev_tendency = self.sun_tendency
         
         self.sun_tendency = self.trendHelper(det_trend,rand_trend,prev_tendency)
@@ -44,7 +45,7 @@ class Weather():
         month = date.month
 
         det_trend = self.target_rain[month] - self.rain
-        rand_trend = randint(0,100) - self.rain
+        rand_trend = randint(g_rain_bounds[0],g_rain_bounds[1]) - self.rain
         prev_tendency = self.rain_tendency
         
         self.rain_tendency = self.trendHelper(det_trend,rand_trend,prev_tendency)
@@ -54,7 +55,7 @@ class Weather():
         month = date.month
 
         det_trend = self.target_temperature[month] - self.temperature
-        rand_trend = randint(-10,40) - self.temperature
+        rand_trend = randint(g_temp_bounds[0],g_temp_bounds[1]) - self.temperature
         prev_tendency = self.temperature_tendency
         
         self.temperature_tendency = self.trendHelper(det_trend,rand_trend,prev_tendency)

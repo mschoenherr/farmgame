@@ -8,6 +8,7 @@ from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
 
 from model import GameState
+from constants import g_empty,g_dt
 
 class PlantSelection(Widget):
 
@@ -198,7 +199,7 @@ class FarmApp(App):
 
     def build(self):
         game = FarmGame()
-        self.update_event = Clock.schedule_interval(self.update,1.0)
+        self.update_event = Clock.schedule_interval(self.update,g_dt)
         self.update_event.cancel()
         return game
 

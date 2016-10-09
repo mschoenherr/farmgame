@@ -1,17 +1,10 @@
 from util import bet_zero_hun
 from math import pow,exp
-
-# some global variables
-
-g_reg = -10.0
-g_tempr = [20,10] 
-g_hum = [40,20] 
-g_sun = [40,20]
-g_days = 120.0
+from constants import g_reg,g_tempr,g_hum,g_sun,g_days,g_plant_list,g_empty
 
 class Plant():
 
-    def __init__(self,name = "empty", phos= g_reg, nit = g_reg, kal = g_reg, max_gain=0.0,tempr = g_tempr,hum=g_hum,sun = g_sun,days=g_days):
+    def __init__(self,name = g_empty, phos= g_reg, nit = g_reg, kal = g_reg, max_gain=0.0,tempr = g_tempr,hum=g_hum,sun = g_sun,days=g_days):
 
         self.name = name
         self.phosphor = phos
@@ -41,7 +34,7 @@ class Plot():
 
         days = self.plant.days_to_ripeness
 
-        if not self.plant.name == "empty":
+        if not self.plant.name == g_empty:
 
 
             if self.kalium > self.plant.kalium/days and self.phosphor > self.plant.phosphor/days and self.nitrogen > self.plant.nitrogen/days:
@@ -108,5 +101,4 @@ carrots = Plant("Carrots",10,20,10,100.0)
 
 potatoes = Plant("Potatoes",20,10,10,100.0)
 
-plant_dict = {"Carrots" : carrots, "Potatoes": potatoes}
-plant_list = ["Carrots","Potatoes"]
+plant_dict = {g_plant_list[0] : carrots, g_plant_list[1]: potatoes}
