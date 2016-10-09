@@ -1,5 +1,6 @@
 from kivy.properties import BoundedNumericProperty, ObjectProperty, ListProperty
-from acre import *
+from plots import Plot
+from plants import g_plant_dict
 from weather import Weather
 from date import GameDate
 from copy import copy
@@ -20,7 +21,7 @@ class GameState():
     def __init__(self):
 
         self.plots = [Plot() for ind in range(9)]
-        self.available_plants = plant_dict
+        self.available_plants = g_plant_dict
         self.all_plants = g_plant_list
         self.plant_selection = self.all_plants[0]
         self.date = GameDate()
