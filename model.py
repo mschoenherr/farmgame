@@ -1,23 +1,15 @@
-from kivy.properties import BoundedNumericProperty, ObjectProperty, ListProperty
 from plots import Plot
 from plants import g_plant_dict
 from weather import Weather
 from date import GameDate
 from copy import copy
-
-from util import perish_func
+from util import perish_func,cut_off_gauss
 from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty
 # always return copies of yourself so that object reference to gamestate is updated
 # there might be a better way using dispatch but i haven't got that working, yet
 
 class GameState():
 
-    plots = ListProperty()
-
-
-    plant_selection = ObjectProperty(None,True)
-
-    
     def __init__(self):
 
         self.plots = [Plot() for ind in range(9)]
@@ -28,7 +20,6 @@ class GameState():
         self.weather = Weather()
         self.money = g_start_money
 
-        # storage values are pairs of (amount,days_to_perish)
         self.storage = g_storage
         self.prices = g_prices
 
@@ -43,6 +34,8 @@ class GameState():
         self.date.update()
 
         self.perish_storage()
+
+        self.update_prices()
 
         return copy(self)
 
@@ -87,6 +80,20 @@ class GameState():
         for key in self.storage:
 
                 self.storage[key]["amount"] = perish_func(self.storage[key]["amount"],self.storage[key]["days"])
+
+    def update_prices(self):
+
+        for key in self.prices:
+
+            buy_tendency = self.prices[key]["buy_tendency"]
+            sell_tendency = self.prices[key]["sell_tendency"]
+
+            self.prices[key]["buy"] += buy_tendency
+            self.prices[key]["sell"] += sell_tendency
+
+            self.prices[key]["buy_tendency"] += cut_off_gauss(-1.0,1.0,0.0,0.05)
+            self.prices[key]["sell_tendency"] += cut_off_gauss(-0.1,0.1,0.0,0.001)
+
 
     def sell(self,vegetable_name):
 

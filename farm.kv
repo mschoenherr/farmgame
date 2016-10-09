@@ -1,7 +1,6 @@
 #:kivy 1.9.1
 #:import trunc math.trunc
-#:import Popup kivy.uix.popup
-#:import help_string constants
+#:import trunc2 util.trunc2
 
 <ResetButton>:
 
@@ -68,17 +67,25 @@
 <SellItem>:
 
 	rows:1
-	cols:4
+	cols:6
 
 	Image: 
 		source: "images/" + self.parent.name + ".png"
 	
 	Label: 
-		text: "Storage: "+ str(app.game_state.storage[self.parent.name]["amount"])
+		text: "Storage: "+ str(trunc2(app.game_state.storage[self.parent.name]["amount"]))
+
 	Label:
-		text: str(app.game_state.prices[self.parent.name]["buy"]) + "/acre"
+		text: str(trunc2(app.game_state.prices[self.parent.name]["buy"])) + "/acre"
+
 	Label:
-		text: str(app.game_state.prices[self.parent.name]["sell"]) + "/ton"
+		text: str(trunc2(app.game_state.prices[self.parent.name]["buy_tendency"]))
+
+	Label:
+		text: str(trunc2(app.game_state.prices[self.parent.name]["sell"])) + "/ton"
+
+	Label:
+		text: str(trunc2(app.game_state.prices[self.parent.name]["sell_tendency"]))
 
 <WeatherDisplay>:
 

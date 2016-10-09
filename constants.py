@@ -17,7 +17,8 @@ g_start_year = 2016
 
 # storage values are pairs of (amount,days_to_perish)
 g_storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200}}
-g_prices = {"Carrots" : {"buy" : 25, "sell": 0.3},"Potatoes" : {"buy" : 30, "sell": 0.4}}
+g_prices = {"Carrots" : {"buy" : 25, "sell": 0.3, "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Potatoes" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
 g_start_money = 100.0
 
 # default values for plant initialisation
