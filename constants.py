@@ -30,6 +30,3 @@ g_plant_list = ["Carrots","Potatoes"]
 
 # name for null-plant, used to check wether plot has a plant and so on
 g_empty = "empty"
-
-# this is the string displayed by help button on title screen
-g_help_string = "Have a nice game."

@@ -6,10 +6,12 @@ from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.label import Label
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.popup import Popup
 
 from model import GameState
-from constants import g_empty,g_dt,g_help_string
+from constants import g_empty,g_dt
 
 class PlantSelection(Widget):
 
@@ -71,14 +73,26 @@ class SellItem(GridLayout):
 class SellScreen(Screen):
     pass
 
-class HelpPopup(Widget):
-    pass
-
 class HelpButton(Button):
 
     def on_release(self):
 
-        popup = Popup(title="Help",content=HelpPopup(),size_hint=(0.7,0.7)).open()
+        layout = GridLayout(cols=1, spacing = 10,size_hint_y = None)
+        layout.bind(minimum_height=layout.setter('height'))
+
+        fob = open("help.txt")
+        
+        for line in fob.readlines():
+            label = Label(text=line)
+            layout.add_widget(label)
+
+        fob.close()
+
+        content = ScrollView(size_hint=(1,0.9),pos_hint={'top':0.9})
+
+        content.add_widget(layout)
+
+        popup = Popup(title="Help",content=content,size_hint=(0.6,0.6)).open()
 
 class ResetButton(Button):
 
@@ -213,7 +227,6 @@ class FarmGame(ScreenManager):
 class FarmApp(App):
     
     game_state = ObjectProperty(GameState(),True)
-    help_string = ObjectProperty(g_help_string)
 
     def build(self):
         game = FarmGame()
