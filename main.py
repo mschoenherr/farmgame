@@ -6,9 +6,10 @@ from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.popup import Popup
 
 from model import GameState
-from constants import g_empty,g_dt
+from constants import g_empty,g_dt,g_help_string
 
 class PlantSelection(Widget):
 
@@ -69,6 +70,22 @@ class SellItem(GridLayout):
 
 class SellScreen(Screen):
     pass
+
+class HelpPopup(Widget):
+    pass
+
+class HelpButton(Button):
+
+    def on_release(self):
+
+        popup = Popup(title="Help",content=HelpPopup(),size_hint=(0.7,0.7)).open()
+
+class ResetButton(Button):
+
+    def on_release(self):
+
+        if self.last_touch and self.last_touch.is_triple_tap:
+            app.game_state = GameState()
 
 class TitleScreen(Screen):
     pass
@@ -196,6 +213,7 @@ class FarmGame(ScreenManager):
 class FarmApp(App):
     
     game_state = ObjectProperty(GameState(),True)
+    help_string = ObjectProperty(g_help_string)
 
     def build(self):
         game = FarmGame()

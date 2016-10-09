@@ -1,22 +1,43 @@
 #:kivy 1.9.1
 #:import trunc math.trunc
+#:import Popup kivy.uix.popup
+#:import help_string constants
+
+<HelpPopup>:
+	
+	Label:
+		center: self.parent.center
+		text: app.help_string
+
+<ResetButton>:
+
+	text: "Triple tap to reset game"
 
 <TitleScreen>:
 
-	FloatLayout:
+	AnchorLayout:
 
-		Widget:
-			width: min(self.parent.width,self.parent.height)
-			height: min(self.parent.width,self.parent.height)
-			
-			canvas:
-				Rectangle:
-					size: self.size
-					pos: self.pos
-					source: "images/Title.png"
+		canvas:
+			Rectangle:
+				size: self.parent.width, self.parent.height
+				source: "images/Title.png"
+		GridLayout:
+			rows: 3
+			cols: 1
 
-		Label:
-			text: "FarmGame"
+			size_hint_x: 0.3
+
+			Label:
+				text: "FarmGame"
+				font_size: 32
+
+			HelpButton:
+				size_hint_y: 0.2
+				text: "Help"
+
+			ResetButton:
+				size_hint_x: 0.3
+				size_hint_y: 0.2
 
 <AchievementScreen>:
 
