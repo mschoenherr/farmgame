@@ -4,7 +4,7 @@ from weather import Weather
 from date import GameDate
 from copy import copy
 from util import perish_func,cut_off_gauss
-from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty
+from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty,g_days_to_update, g_price_variance, g_price_drift
 # always return copies of yourself so that object reference to gamestate is updated
 # there might be a better way using dispatch but i haven't got that working, yet
 
@@ -23,19 +23,29 @@ class GameState():
         self.storage = g_storage
         self.prices = g_prices
 
+        self.since_praw_update = 0
+
     def update(self):
 
         for plot in self.plots:
 
             plot.update(self.weather)
 
-        self.weather.update(self.date)
-
         self.date.update()
 
         self.perish_storage()
 
-        self.update_prices()
+        if self.since_praw_update == g_days_to_update:
+
+            self.weather.update(self.date)
+
+            self.update_prices()
+
+            self.since_praw_update = 0
+
+        else:
+
+            self.since_praw_update += 1
 
         return copy(self)
 
@@ -87,12 +97,14 @@ class GameState():
 
             buy_tendency = self.prices[key]["buy_tendency"]
             sell_tendency = self.prices[key]["sell_tendency"]
+            buy = self.prices[key]["buy"]
+            sell = self.prices[key]["sell"]
 
             self.prices[key]["buy"] += buy_tendency
             self.prices[key]["sell"] += sell_tendency
 
-            self.prices[key]["buy_tendency"] += cut_off_gauss(-1.0,1.0,0.0,0.05)
-            self.prices[key]["sell_tendency"] += cut_off_gauss(-0.1,0.1,0.0,0.001)
+            self.prices[key]["buy_tendency"] = cut_off_gauss(0,float("inf"),buy * g_price_drift, buy * g_price_variance) - buy
+            self.prices[key]["sell_tendency"] = cut_off_gauss(0,float("inf"),sell * g_price_drift, sell * g_price_variance) - sell
 
 
     def sell(self,vegetable_name):

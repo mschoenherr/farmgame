@@ -31,3 +31,11 @@ g_plant_list = ["Carrots","Potatoes"]
 
 # name for null-plant, used to check wether plot has a plant and so on
 g_empty = "empty"
+
+# days between price and weather updates
+g_days_to_update = 5
+
+# default values for price progression
+
+g_price_variance = 0.01
+g_price_drift = pow(1.025,g_days_to_update/365.0)
