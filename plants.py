@@ -18,4 +18,12 @@ carrots = Plant("Carrots",10,20,10,100.0)
 
 potatoes = Plant("Potatoes",20,10,10,100.0)
 
-g_plant_dict = {g_plant_list[0] : carrots, g_plant_list[1]: potatoes}
+strawberry = Plant("Strawberry")
+
+corn = Plant("Corn")
+
+cabbage = Plant("Cabbage")
+
+cauliflower = Plant("Cauliflower")
+
+g_plant_dict = {g_plant_list[0] : carrots, g_plant_list[1]: potatoes, g_plant_list[2]: strawberry, g_plant_list[3]: corn, g_plant_list[4]: cabbage, g_plant_list[5]: cauliflower}

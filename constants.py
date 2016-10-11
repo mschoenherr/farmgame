@@ -16,9 +16,15 @@ g_month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", 
 g_start_year = 2016
 
 # storage values are pairs of (amount,days_to_perish)
-g_storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200}}
+g_storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200} \
+        , "Strawberry": {"amount" : 0.0, "days": 30}, "Cabbage": {"amount" : 0.0, "days": 120} \
+        , "Corn": {"amount": 0.0, "days": 100}, "Cauliflower": {"amount": 0.0, "days": 99}}
 g_prices = {"Carrots" : {"buy" : 25, "sell": 0.3, "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Potatoes" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
+        ,"Potatoes" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Strawberry" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Corn" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Cabbage" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Cauliflower" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
 g_start_money = 100.0
 
 # default values for plant initialisation
@@ -27,7 +33,7 @@ g_tempr = [15,7]
 g_hum = [40,30] 
 g_sun = [40,30]
 g_days = 120.0
-g_plant_list = ["Carrots","Potatoes"]
+g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"]
 
 # name for null-plant, used to check wether plot has a plant and so on
 g_empty = "empty"
