@@ -77,7 +77,7 @@ class HelpButton(Button):
 
     def on_release(self):
 
-        layout = GridLayout(cols=1, spacing = 10,size_hint_y = None)
+        layout = GridLayout(cols=1, spacing = 20,size_hint_y = None)
         layout.bind(minimum_height=layout.setter('height'))
 
         fob = open("help.txt")

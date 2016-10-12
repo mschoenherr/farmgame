@@ -11,15 +11,17 @@
 
 	AnchorLayout:
 
-		canvas:
-			Rectangle:
-				size: self.parent.width, self.parent.height
-				source: "images/Title.png"
+		Image:
+			allow_stretch: True
+			size: max(root.width,root.height)*4/3,max(root.width,root.height)
+			source: "images/Title.png"
+
 		GridLayout:
 			rows: 3
 			cols: 1
 
 			size_hint_x: 0.3
+			size_hint_y: 0.8
 
 			Label:
 				text: "FarmGame"
