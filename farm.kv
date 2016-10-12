@@ -1,6 +1,7 @@
 #:kivy 1.9.1
 #:import trunc math.trunc
 #:import trunc2 util.trunc2
+#:import updown util.updown
 
 <ResetButton>:
 
@@ -90,14 +91,26 @@
 <WeatherDisplay>:
 
 	rows: 1
-	cols: 3
+	cols: 9
 
+	Image:
+		source: "images/Sun.png"
 	Label:
-		text: "Sun:" + str(app.game_state.weather.sun) + "/" + str(app.game_state.weather.sun_tendency)
+		text: str(app.game_state.weather.sun) 
+	Image:
+		source: "images/" + updown(app.game_state.weather.sun_tendency) + ".png"
+	Image:
+		source: "images/Rain.png"
 	Label:
-		text: "Rain:" + str(app.game_state.weather.rain) + "/" + str(app.game_state.weather.rain_tendency)
+		text: str(app.game_state.weather.rain)
+	Image:
+		source: "images/" + updown(app.game_state.weather.rain_tendency) + ".png"
+	Image:
+		source: "images/Temperature.png"
 	Label:
-		text: "T:" + str(app.game_state.weather.temperature) + "/" + str(app.game_state.weather.temperature_tendency) + "°C"
+		text: str(app.game_state.weather.temperature) + "°C"
+	Image:
+		source: "images/" + updown(app.game_state.weather.temperature_tendency) + ".png"
 
 	
 <FarmScreen>:
@@ -108,21 +121,33 @@
 
 		GridLayout:
 
+			rows: 2
+			cols: 1
+
 			size_hint_x: 1.0
 			size_hint_y: 0.33
-		
-			rows: 2
-			cols: 3
 
-			Label:
-				text: str(trunc2(app.game_state.money)) + "€"
+			GridLayout:
 
-			Label:
-				text: app.game_state.date.getStringRep()
+				size_hint_x: 1.0
+				size_hint_y: 0.5
+			
+				rows: 1
+				cols: 3
+
+				Label:
+					text: str(trunc2(app.game_state.money)) + "€"
+
+				Label:
+					text: app.game_state.date.getStringRep()
+
+
+				PlantSelection:
 
 			WeatherDisplay:
-
-			PlantSelection:
+				
+				size_hint_x: 1.0
+				size_hint_y: 0.5
 
 		AnchorLayout:
 			size_hint_x: 1.0

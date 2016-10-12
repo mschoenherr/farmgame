@@ -17,3 +17,13 @@ def cut_off_gauss(a,b,mu,sigma):
 def trunc2(x):
 
     return 0.01 * trunc(100 * x)
+
+def updown(num):
+
+    if num >= 0:
+        
+        return "Up"
+
+    else:
+        
+        return "Down"
