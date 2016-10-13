@@ -129,16 +129,17 @@
 			size_hint_x: 1.0
 			size_hint_y: 0.25
 
+			canvas:
+				Rectangle:
+					source: "images/Sky2.png"
+					size: self.size
+					pos: self.pos
+
 			BoxLayout:
 
 				size_hint_x: 1.0
 				size_hint_y: 0.5
 			
-				canvas:
-					Rectangle:
-						source: "images/Sky2.png"
-						size: self.size
-						pos: self.pos
 				Label:
 					text: str(trunc2(app.game_state.money)) + "€"
 
