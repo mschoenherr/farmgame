@@ -58,7 +58,7 @@ class FarmScreen(Screen):
 
     farm = ObjectProperty(None)
     
-class SellItem(GridLayout):
+class SellItem(BoxLayout):
 
     name = StringProperty("Carrots")
     

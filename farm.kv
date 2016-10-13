@@ -11,9 +11,11 @@
 
 	AnchorLayout:
 
-		Image:
-			allow_stretch: True
-			source: "images/Title.png"
+		canvas:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+				source: "images/Title.png"
 
 		BoxLayout:
 
@@ -56,35 +58,65 @@
 	
 	BoxLayout:
 
+		canvas:
+			Rectangle:
+				source: "images/Sellscreen.png"
+				pos: self.pos
+				size: self.size
+
+		spacing: 32
+		padding: 32
+
 		orientation: "vertical"
+
+		Label:
+			text: "Market"
+
+		SellItem:
+			name: "Corn"
+
 		SellItem:
 			name: "Carrots"
+
 
 		SellItem:
 			name: "Potatoes"
 
+		SellItem:
+			name: "Strawberry"
+
+		SellItem:
+			name: "Cauliflower"
+
+		SellItem:
+			name: "Cabbage"
+
 <SellItem>:
 
-	rows:1
-	cols:6
+	canvas:
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			source: "images/Sellitembg.png"
 
 	Image: 
+		allow_stretch: True
 		source: "images/" + self.parent.name + ".png"
 	
 	Label: 
-		text: "Storage: "+ str(trunc2(app.game_state.storage[self.parent.name]["amount"]))
+		text: str(trunc2(app.game_state.storage[self.parent.name]["amount"])) + " tons"
 
 	Label:
-		text: str(trunc2(app.game_state.prices[self.parent.name]["buy"])) + "/acre"
+		text: str(trunc2(app.game_state.prices[self.parent.name]["buy"])) + "€/plot"
+
+	Image:
+		source: "images/" + updown(app.game_state.prices[self.parent.name]["buy_tendency"]) + ".png"
 
 	Label:
-		text: str(trunc2(app.game_state.prices[self.parent.name]["buy_tendency"]))
+		text: str(trunc2(app.game_state.prices[self.parent.name]["sell"])) + "€/ton"
 
-	Label:
-		text: str(trunc2(app.game_state.prices[self.parent.name]["sell"])) + "/ton"
-
-	Label:
-		text: str(trunc2(app.game_state.prices[self.parent.name]["sell_tendency"]))
+	Image:
+		source: "images/" + updown(app.game_state.prices[self.parent.name]["sell_tendency"]) + ".png"
 
 <WeatherDisplay>:
 
