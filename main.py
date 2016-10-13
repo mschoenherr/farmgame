@@ -7,6 +7,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.popup import Popup
@@ -74,14 +75,13 @@ class SellItem(GridLayout):
 class SellScreen(Screen):
     pass
 
-class HelpLabel(Label):
-    pass
-
 class HelpButton(Button):
 
     def on_release(self):
 
-        label = HelpLabel()
+        label = Label(size_hint_y=None,size_hint_x=None)
+
+        label.bind(texture_size=label.setter('size'))
 
         fob = open("help.txt")
         
