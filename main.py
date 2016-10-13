@@ -74,24 +74,24 @@ class SellItem(GridLayout):
 class SellScreen(Screen):
     pass
 
+class HelpLabel(Label):
+    pass
+
 class HelpButton(Button):
 
     def on_release(self):
 
-        layout = GridLayout(cols=1, spacing = 20,size_hint_y = None)
-        layout.bind(minimum_height=layout.setter('height'))
+        label = HelpLabel()
 
         fob = open("help.txt")
         
-        for line in fob.readlines():
-            label = Label(text=line)
-            layout.add_widget(label)
+        label.text = fob.read()
 
         fob.close()
 
-        content = ScrollView(size_hint=(1,0.9),pos_hint={'top':0.9})
+        content = ScrollView(size_hint=(1,1))
 
-        content.add_widget(layout)
+        content.add_widget(label)
 
         popup = Popup(title="Help",content=content,size_hint=(0.6,0.6)).open()
 
