@@ -6,6 +6,7 @@ from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.popup import Popup
@@ -13,7 +14,7 @@ from kivy.uix.popup import Popup
 from model import GameState
 from constants import g_empty,g_dt
 
-class PlantSelection(Widget):
+class PlantSelection(AnchorLayout):
 
     def on_touch_down(self,touch):
 
@@ -28,7 +29,7 @@ class PlantSelection(Widget):
             touch.ungrab(self)
             app.root.dispatch('on_plant_selection')
 
-class FarmPlot(Widget):
+class FarmPlot(AnchorLayout):
 
     index = NumericProperty(0)
 

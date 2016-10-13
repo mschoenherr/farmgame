@@ -15,9 +15,9 @@
 			allow_stretch: True
 			source: "images/Title.png"
 
-		GridLayout:
-			rows: 3
-			cols: 1
+		BoxLayout:
+
+			orientation: "vertical"
 
 			size_hint_x: 0.3
 			size_hint_y: 0.8
@@ -31,7 +31,6 @@
 				text: "Help"
 
 			ResetButton:
-				size_hint_x: 0.3
 				size_hint_y: 0.2
 
 <AchievementScreen>:
@@ -55,11 +54,9 @@
 
 <SellScreen>:
 	
-	GridLayout:
+	BoxLayout:
 
-		rows: 7
-		cols: 1
-
+		orientation: "vertical"
 		SellItem:
 			name: "Carrots"
 
@@ -115,27 +112,27 @@
 
 	
 <FarmScreen>:
-	GridLayout:
+	BoxLayout:
 
-		rows: 2
-		cols: 1
+		orientation: "vertical"
 
-		GridLayout:
+		BoxLayout:
 
-			rows: 2
-			cols: 1
+			orientation: "vertical"
 
 			size_hint_x: 1.0
-			size_hint_y: 0.33
+			size_hint_y: 0.25
 
-			GridLayout:
+			BoxLayout:
 
 				size_hint_x: 1.0
 				size_hint_y: 0.5
 			
-				rows: 1
-				cols: 3
-
+				canvas:
+					Rectangle:
+						source: "images/Sky2.png"
+						size: self.size
+						pos: self.pos
 				Label:
 					text: str(trunc2(app.game_state.money)) + "€"
 
@@ -152,7 +149,7 @@
 
 		AnchorLayout:
 			size_hint_x: 1.0
-			size_hint_y: 0.66
+			size_hint_y: 0.75
 
 			canvas: 
 				Rectangle:
@@ -164,11 +161,15 @@
 
 
 <FarmPlot>:
-	canvas:
-		Rectangle:
-			pos: self.pos
-			size: self.size
-			source: "images/" + app.game_state.plots[self.index].plant.name + ".png"
+	
+	Image:
+		allow_stretch: True
+		size_hint: 1,1
+		source: "images/Farmplot.png"
+	Image:
+		allow_stretch: True
+		size_hint: 1,1
+		source: "images/" + app.game_state.plots[self.parent.index].plant.name + ".png"
 
 <FarmField>:
 
@@ -176,7 +177,7 @@
 		Rectangle:
 			size: self.size
 			pos: self.pos
-			source: "images/meaddow.png"
+			source: "images/Meaddow.png"
 
 	padding: 32
 	spacing: 32
@@ -209,7 +210,13 @@
 
 <PlantSelection>:
 
-	canvas:
-		Rectangle:
-			pos: self.pos
-			source: "images/" + app.game_state.plant_selection + ".png"
+	Image: 
+
+		allow_stretch: True
+		source: "images/Plant_Button.png"
+		size_hint_y: 0.9
+
+	Image:
+		allow_stretch: True
+		size_hint_y: 0.7
+		source: "images/" + app.game_state.plant_selection + ".png"
