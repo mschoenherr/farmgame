@@ -120,3 +120,7 @@ class GameState():
         self.money += price_per_ton * amount
 
         return copy(self)
+
+    def save_game(self):
+
+        return copy(self)

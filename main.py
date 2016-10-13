@@ -12,6 +12,8 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.popup import Popup
 
+import pickle
+
 from model import GameState
 from constants import g_empty,g_dt
 
@@ -100,7 +102,10 @@ class ResetButton(Button):
     def on_release(self):
 
         if self.last_touch and self.last_touch.is_triple_tap:
+
             app.game_state = GameState()
+
+            popup = Popup(title="Savegame deleted",content=Label(text="Restart app!"),size_hint=(1.0,1.0)).open()
 
 class TitleScreen(Screen):
     pass
@@ -238,6 +243,16 @@ class FarmApp(App):
     def update(self,dt):
 
         self.game_state = self.game_state.update()
+
+    def on_start(self):
+        try:
+            self.game_state = pickle.load(open(self.user_data_dir + "/savegame","rb"))
+        except:
+            pass
+
+    def on_stop(self):
+
+        pickle.dump(self.game_state.save_game(),open(self.user_data_dir + "/savegame","w+b"))
 
 if __name__ == "__main__":
     app = FarmApp()
