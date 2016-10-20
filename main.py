@@ -17,7 +17,7 @@ import pickle
 from model import GameState
 from constants import g_empty,g_dt
 
-class PlantSelection(AnchorLayout):
+class PlantSelection(BoxLayout):
 
     def on_touch_down(self,touch):
 

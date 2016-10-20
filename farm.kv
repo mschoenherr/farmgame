@@ -243,13 +243,29 @@
 
 <PlantSelection>:
 
-	Image: 
 
-		allow_stretch: True
-		source: "images/Plant_Button.png"
-		size_hint_y: 0.9
+	AnchorLayout:	
 
-	Image:
-		allow_stretch: True
-		size_hint_y: 0.7
-		source: "images/" + app.game_state.plant_selection + ".png"
+		size_hint_x: 0.66
+		Image: 
+
+			allow_stretch: True
+			source: "images/Plant_Button.png"
+			size_hint_y: 0.9
+
+		Image:
+			allow_stretch: True
+			size_hint_y: 0.7
+			source: "images/" + app.game_state.plant_selection + ".png"
+	BoxLayout:
+
+		size_hint_x: 0.33
+		orientation: "vertical"
+
+		Label:
+			text: str(trunc2(app.game_state.prices[app.game_state.plant_selection]["buy"])) + "€"
+
+		Image:
+			source: "images/" + updown(app.game_state.prices[app.game_state.plant_selection]["buy_tendency"]) + ".png"
+	
+
