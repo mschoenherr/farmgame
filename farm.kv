@@ -107,12 +107,6 @@
 		text: str(trunc2(app.game_state.storage[self.parent.name]["amount"])) + " tons"
 
 	Label:
-		text: str(trunc2(app.game_state.prices[self.parent.name]["buy"])) + "€/plot"
-
-	Image:
-		source: "images/" + updown(app.game_state.prices[self.parent.name]["buy_tendency"]) + ".png"
-
-	Label:
 		text: str(trunc2(app.game_state.prices[self.parent.name]["sell"])) + "€/ton"
 
 	Image:
