@@ -1,10 +1,11 @@
 from plots import Plot
 from plants import g_plant_dict
+from fertilizer import g_fert_dict
 from weather import Weather
 from date import GameDate
 from copy import copy
 from util import perish_func,cut_off_gauss
-from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty,g_days_to_update, g_price_variance, g_price_drift
+from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty,g_days_to_update, g_price_variance, g_price_drift, g_fert_list
 # always return copies of yourself so that object reference to gamestate is updated
 # there might be a better way using dispatch but i haven't got that working, yet
 
@@ -15,6 +16,9 @@ class GameState():
         self.plots = [Plot() for ind in range(9)]
         self.available_plants = g_plant_dict
         self.all_plants = g_plant_list
+        self.available_ferts = g_fert_dict
+        self.all_ferts = g_fert_list
+        self.fert_selection = self.all_ferts[0]
         self.plant_selection = self.all_plants[0]
         self.date = GameDate()
         self.weather = Weather()
@@ -49,7 +53,7 @@ class GameState():
 
         return copy(self)
 
-    def activate_plot(self,index):
+    def plant_plot(self,index):
 
         if self.plots[index].plant.name == g_empty:
 
@@ -67,6 +71,16 @@ class GameState():
 
         return copy(self)
 
+    def cycle_fert_list(self):
+
+        last = self.all_ferts.pop()
+
+        self.all_ferts = [last] + self.all_ferts
+
+        self.fert_selection = self.all_ferts[0]
+
+        return copy(self)
+
     def cycle_plant_list(self):
 
         last = self.all_plants.pop()
@@ -79,9 +93,19 @@ class GameState():
 
     def harvest_plot(self,index):
 
-        result = self.plots[index].harvest()
+        if not self.plots[index].plant.name == g_empty and self.plots[index].crop_is_ripe:
 
-        self.storage[result["vegetable"]]["amount"] += result["amount"]
+            result = self.plots[index].harvest()
+
+            self.storage[result["vegetable"]]["amount"] += result["amount"]
+
+        return copy(self)
+
+    def fertilize_plot(self,index):
+
+        if not self.plots[index].plant.fert:
+
+            self.plots[index].plant.fert = self.available_ferts[self.fert_selection]
 
         return copy(self)
 

@@ -36,8 +36,15 @@ class FarmPlot(AnchorLayout):
 
     def on_touch_up(self,touch):
 
-        if self.collide_point(*touch.pos) and touch.ud and touch.ud["touched"] == "plant_selection":
-            app.root.dispatch('on_plot_touched',self.index)
+        if self.collide_point(*touch.pos):
+
+            if not touch.ud:
+
+                app.root.dispatch('on_harvest',self.index)
+
+            elif touch.ud and touch.ud["touched"] == "plant_selection":
+
+                app.root.dispatch('on_plant',self.index)
 
 class FarmField(GridLayout):
     pass
@@ -130,7 +137,9 @@ class FarmGame(ScreenManager):
 
         print self.screen_names
 
-        self.register_event_type('on_plot_touched')
+        self.register_event_type('on_plant')
+        self.register_event_type('on_fertilize')
+        self.register_event_type('on_harvest')
         self.register_event_type('on_plant_selection')
         self.register_event_type('on_plant_sell')
         
@@ -208,12 +217,20 @@ class FarmGame(ScreenManager):
 
         return super(FarmGame,self).on_touch_up(touch)
 
-    def on_plot_touched(self,index):
+    def on_plant(self,index):
        
         # this is completely hackish but works without too much fuss
         # note that objectproperties only propagate their updates if they are assigned a new value
         # have a look at model.py gamestate always returns a copy of itself
-        app.game_state = app.game_state.activate_plot(index)
+        app.game_state = app.game_state.plant_plot(index)
+
+    def on_fertilize(self,index):
+
+        app.game_state = app.game_state.fertilize_plot(index)
+
+    def on_harvest(self,index):
+
+        app.game_state = app.game_state.harvest_plot(index)
 
     def on_plant_selection(self):
             

@@ -2,12 +2,14 @@ from util import bet_zero_hun
 from math import pow,exp
 from constants import g_empty
 from plants import Plant
+from fertilizer import Fertilizer
 
 class Plot():
 
-    def __init__(self,plant=Plant(),phos = 75, nit = 75, kal = 75, pesti = 10, bugs = 0):
+    def __init__(self,plant=Plant(),phos = 75, nit = 75, kal = 75, pesti = 10, bugs = 0,fert=None):
 
         self.plant = plant
+        self.fertilizer = fert
         self.kalium = kal
         self.nitrogen = nit
         self.phosphor = phos
@@ -43,6 +45,10 @@ class Plot():
                 self.phosphor -= self.plant.phosphor/days
 
 
+
+    def fertilize(self,fert):
+
+        self.fert = fert
 
     def harvest(self):
 

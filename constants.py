@@ -35,11 +35,15 @@ g_sun = [40,30]
 g_days = 120.0
 g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"]
 
+# default values for fertilizers
+
+g_fert_list = ["Kalium","Nitrogen","Phosphor"]
+
 # name for null-plant, used to check wether plot has a plant and so on
 g_empty = "empty"
 
 # days between price and weather updates
-g_days_to_update = 5
+g_days_to_update = 7
 
 # default values for price progression
 
