@@ -17,6 +17,19 @@ import pickle
 from model import GameState
 from constants import g_empty,g_dt
 
+class FertSelection(BoxLayout):
+
+    def on_touch_down(self,touch):
+
+        if self.collide_point(*touch.pos):
+
+            touch.ud["touched"] = "fert_selection"
+
+    def on_touch_up(self,touch):
+
+        if self.collide_point(*touch.pos) and touch.ud and touch.ud["touched"] == "fert_selection":
+            app.root.dispatch('on_fert_selection')
+
 class PlantSelection(BoxLayout):
 
     def on_touch_down(self,touch):
@@ -42,9 +55,13 @@ class FarmPlot(AnchorLayout):
 
                 app.root.dispatch('on_harvest',self.index)
 
-            elif touch.ud and touch.ud["touched"] == "plant_selection":
+            elif touch.ud["touched"] == "plant_selection":
 
                 app.root.dispatch('on_plant',self.index)
+
+            elif touch.ud["touched"] == "fert_selection":
+
+                app.root.dispatch('on_fertilize',self.index)
 
 class FarmField(GridLayout):
     pass
@@ -141,6 +158,7 @@ class FarmGame(ScreenManager):
         self.register_event_type('on_fertilize')
         self.register_event_type('on_harvest')
         self.register_event_type('on_plant_selection')
+        self.register_event_type('on_fert_selection')
         self.register_event_type('on_plant_sell')
         
     def update(self,dt):
@@ -231,6 +249,10 @@ class FarmGame(ScreenManager):
     def on_harvest(self,index):
 
         app.game_state = app.game_state.harvest_plot(index)
+
+    def on_fert_selection(self):
+
+        app.game_state = app.game_state.cycle_fert_list()
 
     def on_plant_selection(self):
             

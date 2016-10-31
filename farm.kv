@@ -161,18 +161,24 @@
 				size_hint_y: 0.5
 			
 				Label:
+					size_hint_x: 0.2
 					text: str(trunc2(app.game_state.money)) + "€"
 
 				Label:
+					size_hint_x: 0.2
 					text: app.game_state.date.getStringRep()
 
+				WeatherDisplay:
+
+					size_hint_x: 0.6
+
+			BoxLayout:
+
+				FertSelection:
 
 				PlantSelection:
 
-			WeatherDisplay:
-				
-				size_hint_x: 1.0
-				size_hint_y: 0.5
+
 
 		AnchorLayout:
 			size_hint_x: 1.0
@@ -228,6 +234,23 @@
 		index: 7
 	FarmPlot:
 		index: 8
+
+<FertSelection>:
+
+
+	AnchorLayout:	
+
+		size_hint_x: 0.66
+		Image: 
+
+			allow_stretch: True
+			source: "images/Plant_Button.png"
+			size_hint_y: 0.9
+
+		Image:
+			allow_stretch: True
+			size_hint_y: 0.7
+			source: "images/" + app.game_state.fert_selection + ".png"
 
 <PlantSelection>:
 

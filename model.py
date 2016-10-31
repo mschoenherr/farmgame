@@ -103,9 +103,11 @@ class GameState():
 
     def fertilize_plot(self,index):
 
-        if not self.plots[index].plant.fert:
+        if not self.plots[index].fertilizer:
 
-            self.plots[index].plant.fert = self.available_ferts[self.fert_selection]
+            fert = self.available_ferts[self.fert_selection]
+
+            self.plots[index].fertilize(fert)
 
         return copy(self)
 
