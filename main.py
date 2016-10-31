@@ -7,6 +7,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
@@ -43,7 +44,7 @@ class PlantSelection(BoxLayout):
         if self.collide_point(*touch.pos) and touch.ud and touch.ud["touched"] == "plant_selection":
             app.root.dispatch('on_plant_selection')
 
-class FarmPlot(AnchorLayout):
+class FarmPlot(FloatLayout):
 
     index = NumericProperty(0)
 

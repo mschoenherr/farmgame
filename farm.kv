@@ -195,14 +195,34 @@
 
 <FarmPlot>:
 	
+	id: par
+
 	Image:
 		allow_stretch: True
+		pos: self.parent.pos
 		size_hint: 1,1
 		source: "images/Farmplot.png"
 	Image:
 		allow_stretch: True
+		pos: self.parent.pos
 		size_hint: 1,1
-		source: "images/" + app.game_state.plots[self.parent.index].plant.name + ".png"
+		source: "images/" + app.game_state.plots[par.index].plant.name + ".png"
+
+	BoxLayout:
+
+		orientation: "vertical"
+
+		pos: self.parent.pos
+		size_hint_x: 0.3
+		size_hint_y: 1.0
+
+		Label: 
+			text: "K:" + str(trunc(app.game_state.plots[par.index].kalium))
+
+		Label: 
+			text: "P:" + str(trunc(app.game_state.plots[par.index].phosphor))
+		Label: 
+			text: "N:" + str(trunc(app.game_state.plots[par.index].nitrogen))
 
 <FarmField>:
 
