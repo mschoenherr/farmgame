@@ -23,29 +23,20 @@ class PlantSelection(BoxLayout):
 
         if self.collide_point(*touch.pos):
 
-            touch.grab(self)
+            touch.ud["touched"] = "plant_selection"
 
     def on_touch_up(self,touch):
 
-        if self.collide_point(*touch.pos) and touch.grab_current is self:
-
-            touch.ungrab(self)
+        if self.collide_point(*touch.pos) and touch.ud and touch.ud["touched"] == "plant_selection":
             app.root.dispatch('on_plant_selection')
 
 class FarmPlot(AnchorLayout):
 
     index = NumericProperty(0)
 
-    def on_touch_down(self,touch):
-
-        if self.collide_point(*touch.pos):
-
-            touch.grab(self)
-
     def on_touch_up(self,touch):
 
-        if self.collide_point(*touch.pos) and touch.grab_current is self:
-            touch.ungrab(self)
+        if self.collide_point(*touch.pos) and touch.ud and touch.ud["touched"] == "plant_selection":
             app.root.dispatch('on_plot_touched',self.index)
 
 class FarmField(GridLayout):
@@ -191,9 +182,9 @@ class FarmGame(ScreenManager):
 
         self.current = new_screen_name
 
-    def on_touch_move(self,touch):
+    def on_touch_up(self,touch):
 
-        if not self.swiped:
+        if not self.swiped and not(touch.ud):
 
             if touch.ox - touch.x > self.width/4:
 
@@ -214,6 +205,8 @@ class FarmGame(ScreenManager):
 
                 self.switch_screen('up')
                 return True
+
+        return super(FarmGame,self).on_touch_up(touch)
 
     def on_plot_touched(self,index):
        
