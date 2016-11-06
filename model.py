@@ -5,7 +5,7 @@ from weather import Weather
 from date import GameDate
 from copy import copy
 from util import perish_func,cut_off_gauss
-from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty,g_days_to_update, g_price_variance, g_price_drift, g_fert_list
+from constants import g_storage,g_prices,g_start_money,g_plant_list,g_empty,g_days_to_update, g_price_variance, g_price_drift, g_fert_list, g_fert_prices
 # always return copies of yourself so that object reference to gamestate is updated
 # there might be a better way using dispatch but i haven't got that working, yet
 
@@ -18,6 +18,7 @@ class GameState():
         self.all_plants = g_plant_list
         self.available_ferts = g_fert_dict
         self.all_ferts = g_fert_list
+        self.fert_prices = g_fert_prices
         self.fert_selection = self.all_ferts[0]
         self.plant_selection = self.all_plants[0]
         self.date = GameDate()
@@ -65,10 +66,6 @@ class GameState():
 
                 self.money -= self.prices[seed.name]["buy"]
 
-        elif self.plots[index].crop_is_ripe:
-
-            self.harvest_plot(index)
-
         return copy(self)
 
     def cycle_fert_list(self):
@@ -109,6 +106,8 @@ class GameState():
 
             self.plots[index].fertilize(fert)
 
+            self.money -= self.fert_prices[self.fert_selection]["buy"]
+
         return copy(self)
 
     def perish_storage(self):
@@ -132,6 +131,14 @@ class GameState():
             self.prices[key]["buy_tendency"] = cut_off_gauss(0,float("inf"),buy * g_price_drift, buy * g_price_variance) - buy
             self.prices[key]["sell_tendency"] = cut_off_gauss(0,float("inf"),sell * g_price_drift, sell * g_price_variance) - sell
 
+        for key in self.fert_prices:
+
+            buy_tendency = self.fert_prices[key]["buy_tendency"]
+            buy = self.fert_prices[key]["buy"]
+
+            self.fert_prices[key]["buy"] += buy_tendency
+
+            self.fert_prices[key]["buy_tendency"] = cut_off_gauss(0,float("inf"),buy * g_price_drift, buy * g_price_variance) - buy
 
     def sell(self,vegetable_name):
 

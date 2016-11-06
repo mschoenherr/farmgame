@@ -1,3 +1,5 @@
+from constants import g_empty
+
 class Fertilizer():
 
     def __init__(self,name="Kalium",quantity=10,absorbing_rate=0.01):
@@ -6,11 +8,15 @@ class Fertilizer():
         self.quantity = quantity
         self.absorbing_rate=0.01
 
-    def diffusionAmount(self,fert_level,water_level):
+    def diffusionAmount(self,water_level):
 
         quantity = self.quantity * self.absorbing_rate
 
         self.quantity -= quantity
+
+        if self.quantity < 0.1:
+
+            self.name = g_empty
 
         return quantity
 

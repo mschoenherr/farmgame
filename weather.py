@@ -1,6 +1,7 @@
 from random import randint
 from math import trunc
-from constants import g_target_rain,g_target_sun,g_target_temperature,g_temp_bounds,g_sun_bounds,g_rain_bounds
+from util import cut_off_gauss
+from constants import g_target_rain,g_target_sun,g_target_temperature,g_temp_bounds,g_sun_bounds,g_rain_bounds,g_tempvar
 
 class Weather():
 
@@ -55,7 +56,7 @@ class Weather():
         month = date.month
 
         det_trend = self.target_temperature[month] - self.temperature
-        rand_trend = randint(g_temp_bounds[0],g_temp_bounds[1]) - self.temperature
+        rand_trend = cut_off_gauss(g_temp_bounds[0],g_temp_bounds[1],self.target_temperature[month],g_tempvar) - self.temperature
         prev_tendency = self.temperature_tendency
         
         self.temperature_tendency = self.trendHelper(det_trend,rand_trend,prev_tendency)

@@ -1,5 +1,6 @@
 # g_dt gives time between two update ticks
-g_dt = 0.8
+g_dt = 0.5
+g_days_of_year = 365
 # Mean values for weathers deterministic part
 g_target_temperature = [2,4,8,12,19,22,24,24,19,14,7,4]
 g_target_rain = [50,30,38,50,25,60,60,80,45,70,90,30]
@@ -19,33 +20,50 @@ g_start_year = 2016
 g_storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200} \
         , "Strawberry": {"amount" : 0.0, "days": 30}, "Cabbage": {"amount" : 0.0, "days": 120} \
         , "Corn": {"amount": 0.0, "days": 100}, "Cauliflower": {"amount": 0.0, "days": 99}}
+
+# money stuff
 g_prices = {"Carrots" : {"buy" : 25, "sell": 0.3, "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Potatoes" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Strawberry" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Corn" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Cabbage" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Cauliflower" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
+
+g_fert_prices = {"Kalium": {"buy": 5.0, "buy_tendency": 0.0} \
+                ,"Nitrogen": {"buy": 5.0, "buy_tendency": 0.0} \
+                ,"Phosphor": {"buy": 5.0, "buy_tendency": 0.0}}
+
 g_start_money = 100.0
 
 # default values for plant initialisation
-g_reg = -10.0
+g_reg = -5.0
 g_tempr = [15,7] 
 g_hum = [40,30] 
 g_sun = [40,30]
 g_days = 120.0
+g_water_pref = [50.0,20]
 g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"]
 
 # default values for fertilizers
 
 g_fert_list = ["Kalium","Nitrogen","Phosphor"]
 
-# name for null-plant, used to check wether plot has a plant and so on
+# initialization parameters for plots
+
+g_phos = 75
+g_kal = 75
+g_nit = 75
+g_pesti = 0
+g_water = 40
+
+# name for null-objects, used to check wether plot has a plant and is equal to the name of an empty image
 g_empty = "empty"
 
 # days between price and weather updates
 g_days_to_update = 7
+g_tempvar = 2.0
 
 # default values for price progression
 
 g_price_variance = 0.01
-g_price_drift = pow(1.025,g_days_to_update/365.0)
+g_price_drift = pow(1.025,g_days_to_update/g_days_of_year)

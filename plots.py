@@ -1,12 +1,12 @@
 from util import bet_zero_hun
 from math import pow,exp
-from constants import g_empty
+from constants import g_empty,g_phos,g_nit,g_kal,g_pesti,g_water,g_days_of_year
 from plants import Plant
 from fertilizer import Fertilizer
 
 class Plot():
 
-    def __init__(self,plant=Plant(),phos = 75, nit = 75, kal = 75, pesti = 10, bugs = 0,fert=None):
+    def __init__(self,plant=Plant(),phos = g_phos, nit = g_nit, kal = g_kal, water = g_water,fert=Fertilizer("Empty"),pesti= g_pesti):
 
         self.plant = plant
         self.fertilizer = fert
@@ -14,7 +14,7 @@ class Plot():
         self.nitrogen = nit
         self.phosphor = phos
         self.pesticide = pesti
-        self.bug_level = bugs
+        self.water_level = water
         self.gain = 0.0
         self.days_of_growth = 0
         self.crop_is_ripe = False
@@ -25,12 +25,32 @@ class Plot():
 
         if not self.plant.name == g_empty:
 
+            # if there are not enoug nutritients in the soil, do not grow the plant
+            if self.kalium > self.plant.kalium/days and self.phosphor > self.plant.phosphor/days and self.nitrogen > self.plant.nitrogen/days and self.water_level > self.plant.water_pref[0]/days:
 
-            if self.kalium > self.plant.kalium/days and self.phosphor > self.plant.phosphor/days and self.nitrogen > self.plant.nitrogen/days:
                 self.kalium -= self.plant.kalium/days
                 self.nitrogen -= self.plant.nitrogen/days
                 self.phosphor -= self.plant.phosphor/days
+
+                # water is absorbed according to the weather
+
+                self.water_level -= self.plant.water_pref[0]/days - weather.rain/g_days_of_year
+
+                # absorb the fertilizer
+
+                if self.fertilizer.name == "Kalium":
+
+                    self.kalium += self.fertilizer.diffusionAmount(self.water_level)
+
+                if self.fertilizer.name == "Phosphor":
+
+                    self.phosphor += self.fertilizer.diffusionAmount(self.water_level)
+
+                if self.fertilizer.name == "Nitrogen":
+
+                    self.nitrogen += self.fertilizer.diffusionAmount(self.water_level)
                 
+                # the gained quanitity depends on the weather
                 self.gain += self.quality_based_gain(self.plant,weather)
                 self.days_of_growth += 1
 
@@ -38,17 +58,28 @@ class Plot():
 
                     self.crop_is_ripe = True
 
+                    # the crop is worthless after 14 days
+
+                    if self.days_of_growth >= self.plant.days_to_ripeness + 14:
+                        self.gain = 0
+                        self.harvest()
+
                 #lacks pesticide application, and contamination!
         else:
                 self.kalium -= self.plant.kalium/days
                 self.nitrogen -= self.plant.nitrogen/days
                 self.phosphor -= self.plant.phosphor/days
 
+        self.kalium = bet_zero_hun(self.kalium)
+        self.phosphor = bet_zero_hun(self.phosphor)
+        self.nitrogen = bet_zero_hun(self.nitrogen)
+        self.water_level = bet_zero_hun(self.water_level)
+
 
 
     def fertilize(self,fert):
 
-        self.fert = fert
+        self.fertilizer = fert
 
     def harvest(self):
 
@@ -70,13 +101,13 @@ class Plot():
 
         max_gain_day = plant.max_gain/plant.days_to_ripeness
 
-        hum_r = self.rangeHelper(weather.rain,plant.humidity_pref)
+        wat_r = self.rangeHelper(self.water_level,plant.water_pref)
         sun_r = self.rangeHelper(weather.sun,plant.sun_pref)
         temp_r = self.rangeHelper(weather.temperature,plant.temp_pref)
         
-        result = max_gain_day * hum_r * sun_r * temp_r * exp(-self.bug_level)
+        result = max_gain_day * (wat_r + sun_r + temp_r)/3
 
-        #somehow soil contamination should count!
+        #somehow soil contamination should count! and bug level
 
         return result
 
