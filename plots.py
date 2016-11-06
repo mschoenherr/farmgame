@@ -6,7 +6,7 @@ from fertilizer import Fertilizer
 
 class Plot():
 
-    def __init__(self,plant=Plant(),phos = g_phos, nit = g_nit, kal = g_kal, water = g_water,fert=Fertilizer("Empty"),pesti= g_pesti):
+    def __init__(self,plant=Plant(),phos = g_phos, nit = g_nit, kal = g_kal, water = g_water,fert=Fertilizer(),pesti= g_pesti):
 
         self.plant = plant
         self.fertilizer = fert
@@ -25,6 +25,8 @@ class Plot():
 
         if not self.plant.name == g_empty:
 
+            # days of growth are incremented here, so that there is finite amount of time where a plant can grow, preventing indefinite growth
+            self.days_of_growth += 1
             # if there are not enoug nutritients in the soil, do not grow the plant
             if self.kalium > self.plant.kalium/days and self.phosphor > self.plant.phosphor/days and self.nitrogen > self.plant.nitrogen/days and self.water_level > self.plant.water_pref[0]/days:
 
@@ -52,17 +54,16 @@ class Plot():
                 
                 # the gained quanitity depends on the weather
                 self.gain += self.quality_based_gain(self.plant,weather)
-                self.days_of_growth += 1
 
-                if self.days_of_growth >= self.plant.days_to_ripeness:
+            if self.days_of_growth >= days:
 
-                    self.crop_is_ripe = True
+                self.crop_is_ripe = True
 
-                    # the crop is worthless after 14 days
+                # the crop is worthless after 14 days
 
-                    if self.days_of_growth >= self.plant.days_to_ripeness + 14:
-                        self.gain = 0
-                        self.harvest()
+            if self.days_of_growth >= days + 14:
+                self.gain = 0
+                self.harvest()
 
                 #lacks pesticide application, and contamination!
         else:
@@ -75,8 +76,6 @@ class Plot():
         self.nitrogen = bet_zero_hun(self.nitrogen)
         self.water_level = bet_zero_hun(self.water_level)
 
-
-
     def fertilize(self,fert):
 
         self.fertilizer = fert
@@ -88,6 +87,7 @@ class Plot():
 
         self.gain = 0.0
         self.days_of_growth = 0 
+        self.crop_is_ripe = False
 
         self.plant = Plant()
 

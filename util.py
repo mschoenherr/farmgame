@@ -27,3 +27,13 @@ def updown(num):
     else:
         
         return "Down"
+
+def isripe(boolean):
+
+    if boolean:
+
+        return "Check"
+
+    else:
+
+        return "Empty"

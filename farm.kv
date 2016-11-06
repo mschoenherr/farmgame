@@ -2,6 +2,7 @@
 #:import trunc math.trunc
 #:import trunc2 util.trunc2
 #:import updown util.updown
+#:import isripe util.isripe
 
 <ResetButton>:
 
@@ -216,13 +217,37 @@
 		size_hint_x: 0.3
 		size_hint_y: 1.0
 
-		Label: 
-			text: "K:" + str(trunc(app.game_state.plots[par.index].kalium))
+		AnchorLayout:
+			Image:
+				source: "images/Kalium.png"
+				size: self.parent.size
+			Label: 
+				text: str(trunc(app.game_state.plots[par.index].kalium))
 
-		Label: 
-			text: "P:" + str(trunc(app.game_state.plots[par.index].phosphor))
-		Label: 
-			text: "N:" + str(trunc(app.game_state.plots[par.index].nitrogen))
+		AnchorLayout:
+			Image:
+				source: "images/Phosphor.png"
+				size: self.parent.size
+			Label: 
+				text: str(trunc(app.game_state.plots[par.index].phosphor))
+
+		AnchorLayout:
+			Image:
+				source: "images/Nitrogen.png"
+				size: self.parent.size
+			Label: 
+				text: str(trunc(app.game_state.plots[par.index].nitrogen))
+		
+		AnchorLayout:
+			Image:
+				source: "images/Water.png"
+			Label: 
+				text: str(trunc(app.game_state.plots[par.index].water_level))
+
+	Image:
+		pos: par.pos
+		source: "images/" + isripe(app.game_state.plots[par.index].crop_is_ripe) + ".png"
+
 
 <FarmField>:
 
@@ -271,6 +296,17 @@
 			allow_stretch: True
 			size_hint_y: 0.7
 			source: "images/" + app.game_state.fert_selection + ".png"
+	BoxLayout:
+
+		size_hint_x: 0.33
+		orientation: "vertical"
+
+		Label:
+			text: str(trunc2(app.game_state.fert_prices[app.game_state.fert_selection]["buy"])) + "€"
+
+		Image:
+			source: "images/" + updown(app.game_state.fert_prices[app.game_state.fert_selection]["buy_tendency"]) + ".png"
+	
 
 <PlantSelection>:
 

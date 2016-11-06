@@ -1,18 +1,18 @@
-from constants import g_empty
+from constants import g_empty, g_abs_rate, g_fert_quant
 
 class Fertilizer():
 
-    def __init__(self,name="Kalium",quantity=10,absorbing_rate=0.01):
+    def __init__(self,name=g_empty,quantity=g_fert_quant,absorbing_rate=g_abs_rate):
 
         self.name = name
         self.quantity = quantity
-        self.absorbing_rate=0.01
+        self.absorbing_rate = absorbing_rate
 
     def diffusionAmount(self,water_level):
 
-        quantity = self.quantity * self.absorbing_rate
+        d_quantity = self.quantity * self.absorbing_rate
 
-        self.quantity -= quantity
+        self.quantity -= d_quantity
 
         if self.quantity < 0.1:
 
@@ -20,8 +20,8 @@ class Fertilizer():
 
         return quantity
 
-Kalium = Fertilizer("Kalium",10,0.01)
-Nitrogen = Fertilizer("Nitrogen",10,0.01)
-Phosphor = Fertilizer("Phosphor",10,0.01)
+Kalium = Fertilizer("Kalium")
+Nitrogen = Fertilizer("Nitrogen")
+Phosphor = Fertilizer("Phosphor")
 
 g_fert_dict = {"Kalium": Kalium, "Nitrogen": Nitrogen, "Phosphor": Phosphor}

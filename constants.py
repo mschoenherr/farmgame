@@ -40,13 +40,15 @@ g_reg = -5.0
 g_tempr = [15,7] 
 g_hum = [40,30] 
 g_sun = [40,30]
-g_days = 120.0
+g_days = 120
 g_water_pref = [50.0,20]
 g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"]
 
 # default values for fertilizers
 
 g_fert_list = ["Kalium","Nitrogen","Phosphor"]
+g_abs_rate = 0.1
+g_fert_quant = 10.0
 
 # initialization parameters for plots
 
