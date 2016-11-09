@@ -18,7 +18,7 @@ class Fertilizer():
 
             self.name = g_empty
 
-        return quantity
+        return d_quantity
 
 Kalium = Fertilizer("Kalium")
 Nitrogen = Fertilizer("Nitrogen")
