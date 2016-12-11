@@ -117,11 +117,11 @@ class ResetButton(Button):
 
     def on_release(self):
 
-        if self.last_touch and self.last_touch.is_triple_tap:
+        if self.last_touch and self.last_touch.is_double_tap:
 
             app.game_state = GameState()
 
-            popup = Popup(title="Savegame deleted",content=Label(text="Restart app!"),size_hint=(1.0,1.0)).open()
+            popup = Popup(title="Info",content=Label(text="Game restarted"),size_hint=(0.25,0.15)).open()
 
 class TitleScreen(Screen):
     pass
@@ -148,10 +148,10 @@ class FarmGame(ScreenManager):
         self.upgrade_screen = UpgradeScreen(name='upgrade')
 
         self.add_widget(self.title_screen)
-        self.add_widget(self.upgrade_screen)
+        # self.add_widget(self.upgrade_screen)
         self.add_widget(self.farm_screen)
         self.add_widget(self.sell_screen)
-        self.add_widget(self.achievement_screen)
+        # self.add_widget(self.achievement_screen)
 
         print self.screen_names
 
@@ -182,15 +182,15 @@ class FarmGame(ScreenManager):
 
         elif direction == 'right':
 
-            ind_new = (ind_old + 4) % len(self.screen_names)
+            ind_new = (ind_old + 2) % len(self.screen_names)
 
         elif direction == 'up':
 
-            ind_new = (ind_old + 2) % len(self.screen_names)
+            ind_new = (ind_old + 1) % len(self.screen_names)
 
         elif direction == 'down':
 
-            ind_new = (ind_old + 3) % len(self.screen_names)
+            ind_new = (ind_old + 2) % len(self.screen_names)
 
         else:
 

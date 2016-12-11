@@ -1,0 +1,20 @@
+Swipe down to start game.
+
+The game is halted, whenever you are at the title screen.
+
+To restart the game, double tap the restart button.
+
+The green circle on the upper right of the farm screen
+contains the currently selected plant.
+Tap on a Plot to plant it. When the crop is ripe,
+you can harvest it by tapping again.
+
+To the right of the farm screen is the market screen.
+There you can sell your plants by tapping on them.
+Note that your harvest will slowly perish over time
+so don't wait too long!
+
+Weather and prices for buying/selling plants vary over
+time. Upward tendencies are indicated by a green triangle,
+downward tendencies are indicated by a red triangle.
+
