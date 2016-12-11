@@ -40,6 +40,9 @@ class GameState():
 
         self.perish_storage()
 
+        # don't update every day, but every g_days_to_update
+        # the game would look too hectic otherwise
+
         if self.since_praw_update == g_days_to_update:
 
             self.weather.update(self.date)
@@ -61,8 +64,9 @@ class GameState():
             seed = self.available_plants[self.plant_selection]
 
             if self.money >= self.prices[seed.name]["buy"]:
-
-                self.plots[index].sow(seed)
+                
+                # pass a copy so that plot can't alter prototype plant
+                self.plots[index].sow(copy(seed))
 
                 self.money -= self.prices[seed.name]["buy"]
 
@@ -102,7 +106,8 @@ class GameState():
         if not self.plots[index].fertilizer.name in self.available_ferts.keys():
             fert = self.available_ferts[self.fert_selection]
 
-            self.plots[index].fertilize(fert)
+            # pass a copy so that plot can't alter prototype fertilizer
+            self.plots[index].fertilize(copy(fert))
 
             self.money -= self.fert_prices[self.fert_selection]["buy"]
 

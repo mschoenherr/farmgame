@@ -41,7 +41,7 @@ g_tempr = [15,7]
 g_hum = [40,30] 
 g_sun = [40,30]
 g_days = 120
-g_water_pref = [50.0,20]
+g_water_pref = [50.0,20.0]
 g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"]
 
 # default values for fertilizers

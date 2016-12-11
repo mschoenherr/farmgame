@@ -32,12 +32,10 @@ class Plot():
         if self.fertilizer.name == "Kalium":
 
             self.kalium += self.fertilizer.diffusionAmount(self.water_level)
-
-        if self.fertilizer.name == "Phosphor":
+        elif self.fertilizer.name == "Phosphor":
 
             self.phosphor += self.fertilizer.diffusionAmount(self.water_level)
-
-        if self.fertilizer.name == "Nitrogen":
+        elif self.fertilizer.name == "Nitrogen":
 
             self.nitrogen += self.fertilizer.diffusionAmount(self.water_level)
 
@@ -72,7 +70,7 @@ class Plot():
         self.kalium -= self.plant.kalium/days
         self.nitrogen -= self.plant.nitrogen/days
         self.phosphor -= self.plant.phosphor/days
-        self.water_level -= self.plant.water_pref[0]/days - weather.rain/g_days_of_year
+        self.water_level += self.plant.water_pref[0]/days - weather.rain*1.0/g_days_of_year
 
         self.kalium = bet_zero_hun(self.kalium)
         self.phosphor = bet_zero_hun(self.phosphor)
