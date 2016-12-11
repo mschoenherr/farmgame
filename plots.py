@@ -70,7 +70,7 @@ class Plot():
         self.kalium -= self.plant.kalium/days
         self.nitrogen -= self.plant.nitrogen/days
         self.phosphor -= self.plant.phosphor/days
-        self.water_level += self.plant.water_pref[0]/days - weather.rain*1.0/g_days_of_year
+        self.water_level += (weather.rain - self.water_level)/7 - 3* self.plant.water_pref[0]/days
 
         self.kalium = bet_zero_hun(self.kalium)
         self.phosphor = bet_zero_hun(self.phosphor)

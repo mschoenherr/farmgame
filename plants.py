@@ -14,16 +14,21 @@ class Plant():
         self.water_pref = water
         self.days_to_ripeness = days
 
-carrots = Plant("Carrots")
+# target weather values for reference
+# g_target_temperature = [2,4,8,12,19,22,24,24,19,14,7,4]
+# g_target_rain = [50,30,38,50,25,60,60,80,45,70,90,30]
+# g_target_sun = [15,40,50,80,90,80,90,80,50,40,30,40]
 
-potatoes = Plant("Potatoes")
+carrots = Plant("Carrots",30.0,5.0,5.0,100.0,[20,9],[85,15],[53.0,20.0],180)
 
-strawberry = Plant("Strawberry")
+potatoes = Plant("Potatoes",20.0,20.0,5.0,200.0,[20,9],[85,15],[53.0,20.0],180)
 
-corn = Plant("Corn")
+strawberry = Plant("Strawberry",5.0,20.0,20.0,100.0,[21,10],[85,15],[48.0,15.0],120)
 
-cabbage = Plant("Cabbage")
+corn = Plant("Corn",20.0,5.0,20.0,200.0,[20,9],[85,15],[53.0,20.0],180)
 
-cauliflower = Plant("Cauliflower")
+cabbage = Plant("Cabbage",5.0,30.0,5.0,100.0,[6,10],[35,20],[51.0,30],180)
+
+cauliflower = Plant("Cauliflower",5.0,5.0,30.0,100.0,[10,9],[37,15],[50.0,30],210)
 
 g_plant_dict = {g_plant_list[0] : carrots, g_plant_list[1]: potatoes, g_plant_list[2]: strawberry, g_plant_list[3]: corn, g_plant_list[4]: cabbage, g_plant_list[5]: cauliflower}

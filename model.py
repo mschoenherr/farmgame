@@ -107,9 +107,10 @@ class GameState():
             fert = self.available_ferts[self.fert_selection]
 
             # pass a copy so that plot can't alter prototype fertilizer
-            self.plots[index].fertilize(copy(fert))
+            if self.money >= self.fert_prices[self.fert_selection]["buy"]:
+                self.plots[index].fertilize(copy(fert))
 
-            self.money -= self.fert_prices[self.fert_selection]["buy"]
+                self.money -= self.fert_prices[self.fert_selection]["buy"]
 
         return copy(self)
 

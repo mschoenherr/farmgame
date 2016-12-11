@@ -63,7 +63,7 @@ class Weather():
 
     def trendHelper(self,det,ran,prev):
 
-        trend = 0.7 * det + 0.15 * ran + 0.15 * prev
+        trend = 0.5 * det + 0.25 * ran + 0.25 * prev
 
         return trunc(trend)
 

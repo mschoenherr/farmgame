@@ -11,23 +11,23 @@ g_temp_bounds = [-10,40]
 g_sun_bounds = [0,100]
 g_rain_bounds = [0,100]
 
-# date ranges holds "intervals" of days numbers belonging to the respective month
+# date ranges holds "intervals" of day numbers belonging to the respective month
 g_date_ranges = [[0,30],[31,58],[59,89],[90,119],[120,150],[151,180],[181,211],[212,242],[243,272],[273,303],[304,333],[334,365]]
 g_month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 g_start_year = 2016
 
 # storage values are pairs of (amount,days_to_perish)
-g_storage = {"Carrots" : {"amount" : 0.0, "days":120}, "Potatoes": {"amount":0.0, "days": 200} \
+g_storage = {"Carrots" : {"amount" : 0.0, "days":90}, "Potatoes": {"amount":0.0, "days": 150} \
         , "Strawberry": {"amount" : 0.0, "days": 30}, "Cabbage": {"amount" : 0.0, "days": 120} \
-        , "Corn": {"amount": 0.0, "days": 100}, "Cauliflower": {"amount": 0.0, "days": 99}}
+        , "Corn": {"amount": 0.0, "days": 120}, "Cauliflower": {"amount": 0.0, "days": 90}}
 
 # money stuff
-g_prices = {"Carrots" : {"buy" : 25, "sell": 0.3, "buy_tendency": 0.0, "sell_tendency": 0.0} \
+g_prices = {"Carrots" : {"buy" : 25, "sell": 0.5, "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Potatoes" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Strawberry" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Strawberry" : {"buy" : 30, "sell": 0.8 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
         ,"Corn" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Cabbage" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Cauliflower" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
+        ,"Cabbage" : {"buy" : 30, "sell": 0.6 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Cauliflower" : {"buy" : 30, "sell": 0.6 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
 
 g_fert_prices = {"Kalium": {"buy": 5.0, "buy_tendency": 0.0} \
                 ,"Nitrogen": {"buy": 5.0, "buy_tendency": 0.0} \
@@ -40,15 +40,15 @@ g_reg = -5.0
 g_tempr = [15,7] 
 g_hum = [40,30] 
 g_sun = [40,30]
-g_days = 120
-g_water_pref = [50.0,20.0]
+g_days = 365
+g_water_pref = [0.0,0.0]
 g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"]
 
 # default values for fertilizers
 
 g_fert_list = ["Kalium","Nitrogen","Phosphor"]
-g_abs_rate = 0.1
-g_fert_quant = 10.0
+g_abs_rate = 1.0/30 
+g_fert_quant = 5.0 
 
 #value under which a fertilizer is removed
 g_fert_min = 0.1
