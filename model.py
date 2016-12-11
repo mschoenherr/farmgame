@@ -95,7 +95,6 @@ class GameState():
             result = self.plots[index].harvest()
 
             self.storage[result["vegetable"]]["amount"] += result["amount"]
-
         return copy(self)
 
     def fertilize_plot(self,index):

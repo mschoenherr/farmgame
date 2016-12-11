@@ -55,15 +55,18 @@ class Plot():
                 # the gained quanitity depends on the weather
                 self.gain += self.quality_based_gain(self.plant,weather)
 
-            if self.days_of_growth >= days:
-
-                self.crop_is_ripe = True
-
+            
                 # the crop is worthless after 14 days
 
             if self.days_of_growth >= days + 14:
+                self.sow(Plant())
                 self.gain = 0
-                self.harvest()
+                self.crop_is_ripe = False
+                self.days_of_growth = 0
+            
+            elif self.days_of_growth >= days:
+
+                self.crop_is_ripe = True
 
                 #lacks pesticide application, and contamination!
         else:
@@ -89,7 +92,7 @@ class Plot():
         self.days_of_growth = 0 
         self.crop_is_ripe = False
 
-        self.plant = Plant()
+        self.sow(Plant())
 
         return {"vegetable": name, "amount": amount}
 

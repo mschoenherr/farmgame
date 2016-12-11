@@ -36,4 +36,4 @@ def isripe(boolean):
 
     else:
 
-        return "Empty"
+        return "Nil"
