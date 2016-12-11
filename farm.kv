@@ -25,9 +25,9 @@
 			size_hint_x: 0.3
 			size_hint_y: 0.8
 
-			Label:
-				text: "FarmGame"
-				font_size: 32
+			Image:
+				size_hint_x: 1.0
+				source: "images/Caption_Title.png"
 
 			HelpButton:
 				size_hint_y: 0.2
@@ -70,26 +70,32 @@
 
 		orientation: "vertical"
 
-		Label:
-			text: "Market"
+		Image:
+			size_hint_y: 1.0/9
+			source: "images/Caption_Market.png"
 
 		SellItem:
+			size_hint_y: 1.0/7
 			name: "Corn"
 
 		SellItem:
+			size_hint_y: 1.0/7
 			name: "Carrots"
 
-
 		SellItem:
+			size_hint_y: 1.0/7
 			name: "Potatoes"
 
 		SellItem:
+			size_hint_y: 1.0/7
 			name: "Strawberry"
 
 		SellItem:
+			size_hint_y: 1.0/7
 			name: "Cauliflower"
 
 		SellItem:
+			size_hint_y: 1.0/7
 			name: "Cabbage"
 
 <SellItem>:
