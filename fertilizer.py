@@ -1,8 +1,8 @@
-from constants import g_empty, g_abs_rate, g_fert_quant
+from constants import g_nil, g_abs_rate, g_fert_quant
 
 class Fertilizer():
 
-    def __init__(self,name=g_empty,quantity=g_fert_quant,absorbing_rate=g_abs_rate):
+    def __init__(self,name=g_nil,quantity=g_fert_quant,absorbing_rate=g_abs_rate):
 
         self.name = name
         self.quantity = quantity
@@ -10,13 +10,9 @@ class Fertilizer():
 
     def diffusionAmount(self,water_level):
 
-        d_quantity = self.quantity * self.absorbing_rate
+        d_quantity = self.quantity * min(self.absorbing_rate,1.0)
 
         self.quantity -= d_quantity
-
-        if self.quantity < 0.1:
-
-            self.name = g_empty
 
         return d_quantity
 

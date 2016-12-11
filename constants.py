@@ -50,6 +50,9 @@ g_fert_list = ["Kalium","Nitrogen","Phosphor"]
 g_abs_rate = 0.1
 g_fert_quant = 10.0
 
+#value under which a fertilizer is removed
+g_fert_min = 0.1
+
 # initialization parameters for plots
 
 g_phos = 75
@@ -60,6 +63,7 @@ g_water = 40
 
 # name for null-objects, used to check wether plot has a plant and is equal to the name of an empty image
 g_empty = "empty"
+g_nil = "Nil"
 
 # days between price and weather updates
 g_days_to_update = 7

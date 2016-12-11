@@ -6,7 +6,7 @@
 
 <ResetButton>:
 
-	text: "Triple tap to erase saved game"
+	text: "Restart Game"
 
 <TitleScreen>:
 
@@ -244,6 +244,9 @@
 			Label: 
 				text: str(trunc(app.game_state.plots[par.index].water_level))
 
+	Image:
+		pos: par.pos
+		source: "images/" + app.game_state.plots[par.index].fertilizer.name + "_plot.png"
 	Image:
 		pos: par.pos
 		source: "images/" + isripe(app.game_state.plots[par.index].crop_is_ripe) + ".png"
