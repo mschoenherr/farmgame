@@ -22,12 +22,12 @@ g_storage = {"Carrots" : {"amount" : 0.0, "days":90}, "Potatoes": {"amount":0.0,
         , "Corn": {"amount": 0.0, "days": 120}, "Cauliflower": {"amount": 0.0, "days": 90}}
 
 # money stuff
-g_prices = {"Carrots" : {"buy" : 25, "sell": 0.5, "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Potatoes" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Strawberry" : {"buy" : 30, "sell": 0.8 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Corn" : {"buy" : 30, "sell": 0.4 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Cabbage" : {"buy" : 30, "sell": 0.6 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
-        ,"Cauliflower" : {"buy" : 30, "sell": 0.6 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
+g_prices = {"Carrots" : {"buy" : 25, "sell": 0.6, "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Potatoes" : {"buy" : 30, "sell": 0.5 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Strawberry" : {"buy" : 30, "sell": 0.9 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Corn" : {"buy" : 30, "sell": 0.5 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Cabbage" : {"buy" : 30, "sell": 0.7 , "buy_tendency": 0.0, "sell_tendency": 0.0} \
+        ,"Cauliflower" : {"buy" : 30, "sell": 0.8 , "buy_tendency": 0.0, "sell_tendency": 0.0}}
 
 g_fert_prices = {"Kalium": {"buy": 5.0, "buy_tendency": 0.0} \
                 ,"Nitrogen": {"buy": 5.0, "buy_tendency": 0.0} \
