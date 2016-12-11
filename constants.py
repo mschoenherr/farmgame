@@ -48,7 +48,7 @@ g_plant_list = ["Carrots","Potatoes","Strawberry","Corn","Cabbage","Cauliflower"
 
 g_fert_list = ["Kalium","Nitrogen","Phosphor"]
 g_abs_rate = 1.0/30 
-g_fert_quant = 5.0 
+g_fert_quant = 10.0 
 
 #value under which a fertilizer is removed
 g_fert_min = 0.1
